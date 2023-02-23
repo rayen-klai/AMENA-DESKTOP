@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamsamena;
+package amena;
 
-import digideramers.amena.models.Competition;
-import digideramers.amena.models.Gifts;
-import digidreamers.amena.services.CompetitionCRUD;
-import digidreamers.amena.services.GiftsCRUD;
+import amena.models.Competition;
+import amena.models.Gifts;
+import amena.services.CompetitionCRUD;
+import amena.services.GiftsCRUD;
 import java.sql.Date;
 
 /**
@@ -23,13 +23,13 @@ public class DigiDreamsAmena {
     public static void main(String[] args) {
        // MyConnection mc = MyConnection.getInstance();
     
-        /*
+       
         GiftsCRUD gc = new GiftsCRUD();
         
         Gifts g1 = new Gifts("ahlem","desc1","v1", 1) ; 
         Gifts g2 = new Gifts("mhamdi","desc2","v2", 1) ; 
         
-    //    gc.ajouter(g1);
+       gc.ajouter(g1);
         gc.ajouter(g2);
     
         System.out.println(gc.afficher());
@@ -47,22 +47,22 @@ public class DigiDreamsAmena {
 
     //    System.out.println(gc.getByID(7));
 
-          System.out.println(gc.filterByComp(1));
+         // System.out.println(gc.filterByComp(1));
           
           
-          */
+          
         
-        CompetitionCRUD cr = new CompetitionCRUD(); 
+     //   CompetitionCRUD cr = new CompetitionCRUD(); 
        
-        Competition c1= new Competition("titre1",Date.valueOf("2023-01-2"),Date.valueOf("2023-01-02"),1, 100) ; 
-        Competition c2= new Competition("titre2",Date.valueOf("2023-04-29"),Date.valueOf("2023-05-07"),1, 200) ; 
+    //    Competition c1= new Competition("titre1",Date.valueOf("2023-01-2"),Date.valueOf("2023-01-02"),1, 100) ; 
+    //    Competition c2= new Competition("titre2",Date.valueOf("2023-04-29"),Date.valueOf("2023-05-07"),1, 200) ; 
 
     //    cr.ajouter(c1);
     //    cr.ajouter(c2);
         
-        System.out.println(cr.afficher());
+       // System.out.println(cr.afficher());
         
-        Competition c3= new Competition(2,"titre3",Date.valueOf("2023-05-8"),Date.valueOf("2023-05-10"),3, 250) ; 
+        //Competition c3= new Competition(2,"titre3",Date.valueOf("2023-05-8"),Date.valueOf("2023-05-10"),3, 250) ; 
 
       //  cr.modifier(c3);
         
@@ -73,7 +73,7 @@ public class DigiDreamsAmena {
       
    //     System.out.println(cr.getByID(2));
       
-        System.out.println(cr.filterByType(1));
+        //System.out.println(cr.filterByType(1));
     } 
     
 }

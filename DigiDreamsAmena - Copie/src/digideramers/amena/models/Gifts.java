@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amena.models;
+package digideramers.amena.models;
 
 /**
  *
@@ -77,7 +77,8 @@ public class Gifts {
 
     @Override
     public String toString() {
-        return "Gifts{" + "id=" + id + ", name=" + name + ", description=" + description + ", value=" + value + ", idC=" + idC + '}';
+        return name;
+                //"Gifts{" + "id=" + id + ", name=" + name + ", description=" + description + ", value=" + value + ", idC=" + idC + '}';
     }
 
     

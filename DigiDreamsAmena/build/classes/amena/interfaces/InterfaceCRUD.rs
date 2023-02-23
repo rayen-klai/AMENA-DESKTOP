@@ -1,0 +1,1 @@
+digidreamers.amena.interfaces.InterfaceCRUD

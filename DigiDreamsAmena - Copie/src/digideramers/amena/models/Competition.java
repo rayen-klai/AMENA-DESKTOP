@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amena.models;
+package digideramers.amena.models;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -87,7 +87,8 @@ public Competition(){}
 
     @Override
     public String toString() {
-        return "Competition{" + "id=" + id + ", title=" + title + ", date_deb=" + date_deb + ", date_fin=" + date_fin + ", type=" + type + ", nbp=" + nbp +"}\n";
+        return title;
+                //"Competition{" + "id=" + id + ", title=" + title + ", date_deb=" + date_deb + ", date_fin=" + date_fin + ", type=" + type + ", nbp=" + nbp +"}\n";
     }
     
 }

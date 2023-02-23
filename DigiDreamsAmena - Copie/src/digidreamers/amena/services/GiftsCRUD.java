@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amena.services;
+package digidreamers.amena.services;
 
-import amena.models.Gifts;
+import digideramers.amena.models.Gifts;
 import digidreamers.amena.utils.MyConnection;
 import digidreamers.amena.interfaces.InterfaceCRUD;
 import java.sql.Connection;
