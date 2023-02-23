@@ -85,9 +85,9 @@ public void ajouter(Colis c) {
 @Override
 public void supprimer(int id)  {
     try {
-   /* PreparedStatement statement1 = conn.prepareStatement("DELETE FROM documentexpedition WHERE colis_id = ?");
+    PreparedStatement statement1 = conn.prepareStatement("DELETE FROM documentexpedition WHERE colis_id = ?");
     statement1.setInt(1, id);
-    statement1.executeUpdate();*/
+    statement1.executeUpdate();
     String sql = "DELETE FROM colis WHERE id_colis = ?";
     PreparedStatement preparedStatement = conn.prepareStatement(sql);
     preparedStatement.setInt(1, id);
@@ -229,6 +229,50 @@ public List<Colis> trier(String critere) {
     }
     return colisTrie;
 }
-
-
+public List<Colis> afficher2() {
+    List<Colis> list = new ArrayList<>();
+    try {
+      PreparedStatement statement = conn.prepareStatement("Select * from colis");
+      ResultSet resultSet = statement.executeQuery();
+      while(resultSet.next()){
+          Colis colis = new Colis(
+          resultSet.getString("nomExpediteur"),
+          resultSet.getString("adresseExpediteur"),
+          resultSet.getString("nomDestinataire"),
+          resultSet.getString("adresseDestinataire"),
+          resultSet.getFloat("poids")
+        );
+        colis.setStatut(resultSet.getString("statut"));
+        colis.setDateExpedition(resultSet.getDate("dateExpedition"));
+        list.add(colis);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+return list;
+}
+public List<Colis> filterByStatut(String statut) {
+    List<Colis> list = new ArrayList<>();
+    try {
+        String req = "SELECT * FROM colis WHERE statut = ?";
+        PreparedStatement ps = conn.prepareStatement(req);
+        ps.setString(1, statut);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            Colis c = new Colis();
+            c.setId(rs.getInt(1));
+            c.setNomExpediteur(rs.getString(2));
+            c.setAdresseExpediteur(rs.getString(3));
+            c.setNomDestinataire(rs.getString(4));
+            c.setAdresseDestinataire(rs.getString(5));
+            c.setPoids(rs.getFloat(6));
+            c.setStatut(rs.getString(7));
+            c.setDateExpedition(rs.getDate(8));
+            list.add(c);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return list;
+}
 }
