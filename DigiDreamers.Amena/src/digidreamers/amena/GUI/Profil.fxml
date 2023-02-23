@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="466.0" prefWidth="703.0" style="-fx-background-color: #00416A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digidreamers.amena.GUI.ProfilController">
+    <VBox layoutX="290.0" prefHeight="426.0" prefWidth="435.0" spacing="10.0">
+        <TextField fx:id="fxnom" />
+        <TextField fx:id="fxprenom" />
+        <TextField fx:id="fxcin" prefHeight="25.0" prefWidth="584.0" />
+        <TextField fx:id="fxxadress" />
+        <TextField fx:id="fxxemail" />
+        <ListView fx:id="userListView" prefHeight="221.0" prefWidth="447.0" />
+        <Button fx:id="afficherBtn" layoutX="49.0" layoutY="201.0" onAction="#handleAfficherBtn" text="Afficher">
+            <graphic>
+                <Label text="Utilisateurs" />
+            </graphic>
+        </Button>
+        <Button fx:id="quitterBtn" layoutX="642.0" layoutY="426.0" onAction="#handleQuitterBtn" text="Quitter" />
+       
+    </VBox>
+   <ImageView fx:id="fximg" fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../../../../../amena.png" />
+      </image>
+   </ImageView>
+</AnchorPane>
