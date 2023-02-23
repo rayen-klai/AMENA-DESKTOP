@@ -17,12 +17,12 @@
       <Separator layoutX="151.0" layoutY="117.0" orientation="VERTICAL" prefHeight="200.0" />
       <Separator layoutX="306.0" layoutY="117.0" orientation="VERTICAL" prefHeight="200.0" />
       <Separator layoutX="446.0" layoutY="117.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="6.0" />
-      <Label layoutX="192.0" layoutY="40.0" prefHeight="35.0" prefWidth="204.0" text="Gestion Des Colis" textFill="#1300a4">
+      <Label layoutX="198.0" layoutY="23.0" prefHeight="35.0" prefWidth="204.0" text="Gestion Des Colis" textFill="#1300a4">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="104.0" fitWidth="143.0" layoutX="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="104.0" fitWidth="143.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Media/326412972_856681762111879_232346873904870547_n.png" />
          </image>
@@ -47,5 +47,11 @@
             <Image url="@../../../Media/72647.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="115.0" layoutX="467.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/COLIS.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="178.0" layoutY="64.0" prefHeight="5.0" prefWidth="223.0" />
    </children>
 </AnchorPane>
