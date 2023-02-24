@@ -43,7 +43,7 @@ public class ChatService implements InterfaceCRUD<Message> {
 
             ste.executeUpdate();
 
-            System.out.println("user ajouterajoute!!!");
+            System.out.println("message ajouter!!");
         } catch (SQLException ex) {
             ex.printStackTrace();
 

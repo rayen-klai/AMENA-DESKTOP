@@ -10,6 +10,7 @@ import digidreamers.amena.Models.Message;
 import digidreamers.amena.Models.User;
 import digidreamers.amena.Services.ChatService;
 import digidreamers.amena.Services.UserService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +25,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -33,6 +37,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -64,6 +69,8 @@ public class ChatController implements Initializable {
 
     @FXML
     private Button bafficher;
+    @FXML
+    private Button btnback;
 
     public ChatController() {
         try {
@@ -77,7 +84,6 @@ public class ChatController implements Initializable {
 
     }
 
-    @FXML
     private void sendMessage(ActionEvent event) throws SQLException {
         User user = fxlisteusert.getSelectionModel().getSelectedItem();
         java.sql.Date timestamp = new java.sql.Date(new java.util.Date().getTime());
@@ -182,5 +188,19 @@ public class ChatController implements Initializable {
             }
         });
     }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+         
+    }
+    
 
 }

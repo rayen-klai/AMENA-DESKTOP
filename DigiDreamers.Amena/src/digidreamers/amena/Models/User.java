@@ -6,6 +6,7 @@
 package digidreamers.amena.Models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -24,7 +25,30 @@ public class User {
   private String mot_pass ;
   private String email ;
   private Role role ;
+private byte[] image;
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, Role role, byte[] image) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.image = image;
+    }
     public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, Role role) {
         this.id = id;
         this.cin = cin;
@@ -38,6 +62,8 @@ public class User {
         this.email = email;
         this.role = role;
     }
+
+   
 
     public User(String cin, String adress, String nom, String prenom, Date date_naissance, boolean status, String mot_pass, String email, Role role) {
         this.cin = cin;
@@ -55,10 +81,37 @@ public class User {
        
     }
 
-    public User(String string, String tn, String nom, String pren, Date date, boolean b, String mdp, String aa, int role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, boolean status, String mot_pass, String email, Role role) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
     }
 
+    public User(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
+    public User(String cin, String adress, String nom, String prenom, Date date_naissance, String mot_pass, String email) {
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.mot_pass = mot_pass;
+        this.email = email;
+    }
+
+   
+
+   
    
 
     public int getId() {
@@ -151,7 +204,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + '}';
+        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + ", image=" + image + '}';
+    }
+
+  
+
+    public void setDate_naissance(LocalDate dateNaissance) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

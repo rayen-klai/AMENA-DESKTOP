@@ -55,9 +55,9 @@ public class ProfilController implements Initializable {
     
     public static String semail;
     @FXML
-    private ImageView fximg;
-    @FXML
     private Button chat;
+    @FXML
+    private Button btnback;
 
     public void setUserInformation(String email) throws SQLException {
 
@@ -119,5 +119,9 @@ public class ProfilController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
         
+    }
+
+    @FXML
+    private void back(ActionEvent event) {
     }
 }

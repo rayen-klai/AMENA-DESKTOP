@@ -55,7 +55,7 @@ public class UpdateProfilController implements Initializable {
 
     private UserService userService;
     @FXML
-    private ImageView fximg;
+    private Button btnback;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,7 +85,7 @@ public class UpdateProfilController implements Initializable {
     @FXML
     private void modifierUtilisateur(ActionEvent event) throws SQLException {
         User user = selectedListView.getSelectionModel().getSelectedItem();
-
+      
         if (user != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -94,6 +94,7 @@ public class UpdateProfilController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
+                
                 String nom = nomTextField.getText().trim();
                 String prenom = prenomTextField.getText().trim();
                 String adresse = adresseTextField.getText().trim();
@@ -137,10 +138,10 @@ public class UpdateProfilController implements Initializable {
                     cinAlert.setTitle("Erreur");
                     cinAlert.setHeaderText(null);
                     cinAlert.setContentText("Veuillez saisir un numéro de cin valide (8 chiffres) !");
-                    cinAlert.showAndWait();
+                   cinAlert.showAndWait();
                     return;
                 }
-
+                user.setId(selectedListView.getSelectionModel().getSelectedItem().getId());
                 user.setEmail(email);
                 user.setNom(nom);
                 user.setPrenom(prenom);
@@ -156,6 +157,9 @@ public class UpdateProfilController implements Initializable {
 
                 ObservableList<User> users = FXCollections.observableArrayList(userService.afficher());
                 selectedListView.setItems(users);
+                
+                
+                
             }
         } else {
             Alert selectAlert = new Alert(Alert.AlertType.ERROR);
@@ -165,7 +169,6 @@ public class UpdateProfilController implements Initializable {
             selectAlert.showAndWait();
         }
     }
-@FXML
 private Button btnProfil;
 
 public void initialize() {
@@ -180,5 +183,21 @@ public void initialize() {
             e.printStackTrace();
         }
     });
+    
 }
+
+    @FXML
+    private void back(ActionEvent event) throws IOException {
+        
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        
+         
+    }
+    
+    
 }

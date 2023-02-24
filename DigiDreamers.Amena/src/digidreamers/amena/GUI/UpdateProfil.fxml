@@ -5,13 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #00416A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digidreamers.amena.GUI.UpdateProfilController">
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digidreamers.amena.GUI.UpdateProfilController">
     <children>
         <VBox layoutX="25.0" layoutY="14.0" prefHeight="114.0" prefWidth="220.0" spacing="10.0">
             <Label style="-fx-background-color: #ffffff;" text="Liste des utilisateurs :" />
@@ -33,15 +31,11 @@
             <HBox />
         </VBox>
         
-        <VBox layoutX="300.0" layoutY="211.0" prefHeight="233.0" prefWidth="280.0" spacing="10.0">
+        <VBox layoutX="300.0" layoutY="193.0" prefHeight="251.0" prefWidth="520.0" spacing="10.0">
             <Label prefWidth="297.0" style="-fx-background-color: #ffffff;" text="Utilisateur sélectionné :" />
-            <ListView fx:id="selectedListView" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="selectedListView" prefHeight="206.0" prefWidth="389.0" />
         </VBox>
          <Button fx:id="modifierButton" layoutX="350.0" layoutY="459.0" onAction="#modifierUtilisateur" text="Modifier" />
-      <ImageView fx:id="fximg" fitHeight="150.0" fitWidth="200.0" layoutX="332.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../entrp.jpg" />
-         </image>
-      </ImageView>
+      <Button fx:id="btnback" layoutX="728.0" layoutY="41.0" mnemonicParsing="false" onAction="#back" text="back" />
     </children>
 </AnchorPane>
