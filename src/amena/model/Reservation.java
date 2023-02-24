@@ -27,6 +27,14 @@ public class Reservation {
         this.date_fin = date_fin;
         this.somme = somme;
     }
+ public Reservation(int idRes,int idVeh, int idTrans, Date date_deb, Date date_fin, float somme) {
+        this.idRes = idRes ;    
+        this.idVeh = idVeh;
+        this.idTrans = idTrans;
+        this.date_deb = date_deb;
+        this.date_fin = date_fin;
+        this.somme = somme;
+    }
 
     public Reservation() {
     }

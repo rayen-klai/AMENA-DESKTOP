@@ -26,7 +26,7 @@ public class VehiculeCRUD implements InterfaceCRUD<Vehicule> {
     Connection conn = MyConnection.getInstance().getConn();
     public void ajouter(Vehicule v) {
         try {
-            String req = "INSERT INTO `vehicule` (`type`, `immat`, `etat`, `kilometrage`, `chevaux`, `marque`, `couleur`, `prix`) VALUES (?,?,?,?,?,?,?,?)";
+            String req = "INSERT INTO `vehicule` (`type`, `immat`, `etat`, `kilometrage`, `chevaux`, `marque`, `couleur`, `prix`,`img`) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps=conn.prepareStatement(req);
           
             ps.setString(1, v.getType());
@@ -37,6 +37,7 @@ public class VehiculeCRUD implements InterfaceCRUD<Vehicule> {
             ps.setString(6, v.getMarque());
             ps.setString(7, v.getCouleur());
             ps.setFloat(8, v.getPrix());
+            ps.setString(9, v.getImg());
 
          
              ps.executeUpdate();
@@ -49,14 +50,14 @@ public class VehiculeCRUD implements InterfaceCRUD<Vehicule> {
     public VehiculeCRUD() {
     }
     
-    public void modifier(int id,Vehicule v) {
+    public void modifier(Vehicule v) {
         int inetat ; 
         if (v.isEtat())
             inetat=1 ;
         else
             inetat=0; 
         try {
-            String req = "UPDATE `vehicule` SET `type` = '" + v.getType() + "', `immat` = '" + v.getImmat()+ "', `etat` = '" + inetat + "', `kilometrage` = '" + v.getKilometrage()+ "', `chevaux` = '" + v.getChevaux()+ "', `marque` = '" + v.getMarque()+ "', `couleur` = '" + v.getCouleur()+ "', `prix` = '" + v.getPrix()+ "' WHERE idV = " + id;
+            String req = "UPDATE `vehicule` SET `type` = '" + v.getType() + "', `immat` = '" + v.getImmat()+ "', `etat` = '" + inetat + "', `kilometrage` = '" + v.getKilometrage()+ "', `chevaux` = '" + v.getChevaux()+ "', `marque` = '" + v.getMarque()+ "', `couleur` = '" + v.getCouleur()+ "', `prix` = '" + v.getPrix()+"', `img` = '" + v.getImg()+ "' WHERE idV = " + v.getId();
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("vehicule updated !");
@@ -98,6 +99,7 @@ public class VehiculeCRUD implements InterfaceCRUD<Vehicule> {
              v.setMarque(RS.getString(7));
              v.setCouleur(RS.getString(8));
              v.setPrix(RS.getFloat(9));
+             v.setImg(RS.getString(10));
              list.add(v);
            
             }

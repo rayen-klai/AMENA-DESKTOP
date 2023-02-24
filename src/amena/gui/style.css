@@ -1,0 +1,30 @@
+
+.button
+{
+    -fx-background-color: #2f4558 ;
+}
+.button:hover
+{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.button:pressed
+{
+    -fx-background-color: #2f4558 ;
+}
+
+.pane
+{
+    -fx-background-color :   #f7f7f7 ; 
+    -fx-background-radius : 20 ;  
+}
+
+.pane:hover
+{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.pane:pressed
+{
+    -fx-background-color :   #f7f7f7 ; 
+}

@@ -19,11 +19,11 @@ public class Vehicule {
     private String kilometrage ;
     private String couleur ; 
     private float prix ; 
-
+private String img ; 
      public Vehicule()
      {}
     
-    public Vehicule(int id,String type,String immat, boolean etat,String kilometrage, int chevaux, String marque, String couleur, float prix) {
+    public Vehicule(int id,String type,String immat, boolean etat,String kilometrage, int chevaux, String marque, String couleur, float prix,String img) {
         this.id = id ; 
         this.type = type ; 
         this.immat = immat;
@@ -33,8 +33,10 @@ public class Vehicule {
         this.kilometrage = kilometrage;
         this.couleur = couleur;
         this.prix = prix;
+        this.img = img ;
     }
-    public Vehicule(String type,String immat, boolean etat,String kilometrage,int chevaux, String marque, String couleur, float prix) {
+    public Vehicule(String type,String immat, boolean etat,String kilometrage,int chevaux, String marque, String couleur, float prix,String img) {
+        this.img  = img  ; 
         this.type = type ; 
         this.immat = immat;
         this.etat = etat;
@@ -43,6 +45,14 @@ public class Vehicule {
         this.marque = marque;
         this.couleur = couleur;
         this.prix = prix;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getImg() {
+        return img;
     }
 
     public void setKilometrage(String kilometrage) {
@@ -117,9 +127,27 @@ public class Vehicule {
         this.prix = prix;
     }
 
+    public String nbrEspaceType(String x)
+    {
+        String s= "" ; 
+        int n = x.length() ; 
+        for(int i=0;i<10-n;i++) 
+            s=s+"a" ; 
+       return s ; 
+    }
+    
+     public String nbrEspaceImmat(String x)
+    {
+        String s= "" ; 
+        int n = x.length() ; 
+        for(int i =0;i<15-n;i++) 
+           s=s+"b" ; 
+       return s ; 
+    }
+    
     @Override
     public String toString() {
-        return "Vehicule{" + "id=" + id + ", type=" + type + ", immat=" + immat + ", etat=" + etat + ", chevaux=" + chevaux + ", marque=" + marque + ", kilometrage=" + kilometrage + ", couleur=" + couleur + ", prix=" + prix  + "}\n";
+        return immat ;//+ nbrEspaceImmat(immat) + etat ; // + "   " + chevaux + "   " + marque + "   " + kilometrage + "   " + couleur + "   " + prix ;
     }
     
     

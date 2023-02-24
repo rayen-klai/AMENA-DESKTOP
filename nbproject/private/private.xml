@@ -3,12 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/model/Reservation.java</file>
-            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/services/VehiculeCRUD.java</file>
-            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/services/ReservationCRUD.java</file>
-            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/interfaces/InterfaceCRUD.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/NewFXMain.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/client/locationClient.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/interfaceVelo/AjoutVeloController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/style.css</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/modifier/modifierV.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/client/LocationClientController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutV2/Fajout2.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/camionInterface/CamInterface.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/LocationInterface/GestionLocation.fxml</file>
             <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/Amena.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/camionInterface/CamInterfaceController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/AccueilController.java</file>
             <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/model/Vehicule.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutV1/Fajout.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/client/ReserverController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/Accueil.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/VehInterface.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutMB/ajoutMB.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/client/MainClient.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/VehInterfaceController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/services/VehiculeCRUD.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/LocationInterface/GestionLocationController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutMB/AjoutMBController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutV1/FajoutController.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/First3Controller.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/interfaceVelo/ajoutVelo.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/client/reserver.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/ajoutV2/Fajout2Controller.java</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/dashboard/First3.fxml</file>
+            <file>file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/gui/modifier/ModifierVController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -46,9 +45,9 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
     public ReservationCRUD() {
     }
     
-    public void modifier(int id,Reservation r) {   
+    public void modifier(Reservation r) {   
         try {
-            String req = "UPDATE `reservation` SET `idVeh` = '" + r.getIdVeh() + "', `Date_Deb` = '" + r.getDate_deb()+ "', `date_fin` = '" + r.getDate_fin() + "', `somme` = '" + r.getSomme()+ "' WHERE idRes = " + id;
+            String req = "UPDATE `reservation` SET `idVeh` = '" + r.getIdVeh() + "', `Date_Deb` = '" + r.getDate_deb()+ "', `date_fin` = '" + r.getDate_fin() + "', `somme` = '" + r.getSomme()+ "' WHERE idRes = " + r.getIdRes();
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Reservation updated !");
