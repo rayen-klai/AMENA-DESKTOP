@@ -44,7 +44,7 @@ public class ChatController implements Initializable {
 
     @FXML
     private AnchorPane chatPane;
-   
+
     @FXML
     private Text chatTitle;
     @FXML
@@ -72,56 +72,14 @@ public class ChatController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    
-   public void initialize() throws SQLException {
-    userService = new UserService();
 
-    // récupérer la liste des utilisateurs à partir du service
-    List<User> users = userService.afficher();
+    public void initialize() throws SQLException {
 
-    // convertir la liste en observable list pour pouvoir l'afficher dans la liste view
-    ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+    }
 
-    // ajouter les utilisateurs à la liste view
-    fxlisteusert.setItems(observableUsers);
-
-    fxlisteusert.setCellFactory(new Callback<ListView<User>, ListCell<User>>() {
-        @Override
-        public ListCell<User> call(ListView<User> param) {
-            return new ListCell<User>() {
-                @Override
-                protected void updateItem(User user, boolean empty) {
-                    super.updateItem(user, empty);
-
-                    if (user != null) {
-                        // afficher le nom de l'utilisateur dans la cellule de la liste
-                        setText(user.getNom());
-                    } else {
-                        setText(null);
-                    }
-                }
-            };
-        }
-    });
-
-    fxlisteusert.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
-        @Override
-        public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-            // récupérer l'utilisateur sélectionné
-            User user = fxlisteusert.getSelectionModel().getSelectedItem();
-
-            // afficher le nom de l'utilisateur sélectionné dans le titre de la fenêtre de chat
-            //chatTitle.setText("Chat avec " + user.getNom());
-        }
-    });
-}
-   
-   
-    
+    @FXML
     private void sendMessage(ActionEvent event) throws SQLException {
         User user = fxlisteusert.getSelectionModel().getSelectedItem();
-
         java.sql.Date timestamp = new java.sql.Date(new java.util.Date().getTime());
         String message = messageField.getText();
         // Vérification de saisie
@@ -133,51 +91,96 @@ public class ChatController implements Initializable {
             alert.showAndWait();
             return;
         }
-
         UserService u = new UserService();
-
         User p = u.getUserByEmai(semail);
         int senderId = p.getId();
         ChatService chat = new ChatService();
         int recerveid = user.getId();
         Message m = new Message(senderId, recerveid, message, timestamp);
-
         chat.ajouter(m);
+        User selectedUser = fxlisteusert.getSelectionModel().getSelectedItem();
 
-    }
-    /*
-    @FXML
-private void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) throws SQLException {
-    User selectedUser = fxlisteusert.getSelectionModel().getSelectedItem();
-    User currentUser = userService.getUserByEmai(semail);
+        List<Message> messages = chat.getChatsBySenderReceiverIds(p.getId(), selectedUser.getId());
+        ObservableList<Message> observableMessages = FXCollections.observableArrayList(messages);
+        messageList.setItems(observableMessages);
+        messageList.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
+            @Override
+            public ListCell<Message> call(ListView<Message> listView) {
+                return new ListCell<Message>() {
+                    @Override
+                    protected void updateItem(Message item, boolean empty) {
+                        super.updateItem(item, empty);
 
-    List<Message> messages = ChatService.getChatsBySenderReceiverIds(currentUser.getId(), selectedUser.getId());
-    ObservableList<Message> observableMessages = FXCollections.observableArrayList(messages);
-
-    messageList.setItems(observableMessages);
-    messageList.setCellFactory(new Callback<ListView<Message>, ListCell<Message>>() {
-        @Override
-        public ListCell<Message> call(ListView<Message> listView) {
-            return new ListCell<Message>() {
-                @Override
-                protected void updateItem(Message item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        setText(item.getContent());
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item.getContent());
+                        }
                     }
-                }
-            };
-        }
-    });
-}*/
+                };
+            }
+        });
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            userService = new UserService();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sendButton.setOnAction((event) -> {
+            try {
+                sendMessage(event);
+            } catch (SQLException ex) {
+                Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        try {
+            userService = new UserService();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // récupérer la liste des utilisateurs à partir du service
+        List<User> users = userService.afficher();
+
+        // convertir la liste en observable list pour pouvoir l'afficher dans la liste view
+        ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+
+        // ajouter les utilisateurs à la liste view
+        fxlisteusert.setItems(observableUsers);
+
+        fxlisteusert.setCellFactory(new Callback<ListView<User>, ListCell<User>>() {
+            @Override
+            public ListCell<User> call(ListView<User> param) {
+                return new ListCell<User>() {
+                    @Override
+                    protected void updateItem(User user, boolean empty) {
+                        super.updateItem(user, empty);
+
+                        if (user != null) {
+                            // afficher le nom de l'utilisateur dans la cellule de la liste
+                            setText(user.getNom());
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+
+        fxlisteusert.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+            @Override
+            public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
+                // récupérer l'utilisateur sélectionné
+                User user = fxlisteusert.getSelectionModel().getSelectedItem();
+
+                // afficher le nom de l'utilisateur sélectionné dans le titre de la fenêtre de chat
+                //chatTitle.setText("Chat avec " + user.getNom());
+            }
+        });
     }
 
-
-   
 }

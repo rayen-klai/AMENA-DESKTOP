@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -51,9 +52,12 @@ public class ProfilController implements Initializable {
     @FXML
 
     private TextField fxcin;
+    
     public static String semail;
-
     @FXML
+    private ImageView fximg;
+    @FXML
+    private Button chat;
 
     public void setUserInformation(String email) throws SQLException {
 
@@ -91,7 +95,6 @@ public class ProfilController implements Initializable {
         stage.close();
     }
 
-    @FXML
     private void handleModifierBtn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateProfil.fxml"));
         Parent root = loader.load();
@@ -105,5 +108,16 @@ public class ProfilController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // throw new UnsupportedOperationException("Not supported yet."); 
         //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @FXML
+    private void chat(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Chat.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        
     }
 }

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
    </stylesheets>
    <children>
       <CheckBox fx:id="fxrole" layoutX="191.0" layoutY="315.0" style="-fx-background-color: blanc; -fx-background-color: red;" text="Transporter" />
-      <Button fx:id="fxcreate" layoutX="229.0" layoutY="360.0" minWidth="32.0" onAction="#addperson" prefHeight="25.0" prefWidth="125.0" text="Create" />
+      <Button fx:id="fxcreate" layoutX="339.0" layoutY="409.0" minWidth="32.0" onAction="#addperson" prefHeight="25.0" prefWidth="125.0" text="Create" />
       <TextField fx:id="fxnom" layoutX="191.0" layoutY="78.0" prefWidth="200" promptText="Enter your name" />
       <Label layoutX="104.0" layoutY="82.0" style="-fx-background-color: #ffffff;" styleClass="label-title" text="Name" />
       <TextField fx:id="fxprenom" layoutX="191.0" layoutY="123.0" prefWidth="200" promptText="Enter your first name" />
@@ -25,8 +26,9 @@
       <Label layoutX="104.0" layoutY="244.0" style="-fx-background-color: #ffffff;" styleClass="label-title" text="Address" />
       <TextField fx:id="fxmotpass" layoutX="191.0" layoutY="279.0" prefWidth="200" promptText="Enter your password" />
       <Label layoutX="104.0" layoutY="283.0" style="-fx-background-color: #ffffff;" styleClass="label-title" text="Password" />
-      <Label layoutX="104.0" layoutY="328.0" style="-fx-background-color: #ffffff;" styleClass="label-title" text="Date of Birth" />
-         <DatePicker fx:id="fxdob" layoutX="191.0" layoutY="324.0" prefWidth="200" />
+      <Label layoutX="92.0" layoutY="358.0" style="-fx-background-color: #ffffff;" styleClass="label-title" text="Date of Birth" />
+      <DatePicker fx:id="fxdateNaissance" layoutX="163.0" layoutY="363.0" />
+       
 
    </children>
 </AnchorPane>

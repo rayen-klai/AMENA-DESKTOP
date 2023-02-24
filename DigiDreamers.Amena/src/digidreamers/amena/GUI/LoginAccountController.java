@@ -31,6 +31,7 @@ public class LoginAccountController implements Initializable {
 
     private User user;
     private UserService userService;
+    public static String semail;
 
     /**
      * Initializes the controller class.
@@ -50,6 +51,7 @@ public class LoginAccountController implements Initializable {
         password = hashPassword(password);
 
         UserService user = new UserService();
+         semail = fxemail.getText();
 
         // Validate email address
         if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", email)) {
@@ -77,14 +79,15 @@ public class LoginAccountController implements Initializable {
     @FXML
     private void handleConnectButtonAction() throws IOException, SQLException, NoSuchAlgorithmException {
         if (validateInput()) {
-            
+
             //User u = userService.getUserByEmai(email); // Récupérer l'utilisateur connecté
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Chat.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
 
             Parent root = loader.load();
             ProfilController dc = loader.getController();
             String email = fxemail.getText();
             
+
             dc.setUserInformation(email);
 
             // Create a new scene with the loaded FXML file and show it

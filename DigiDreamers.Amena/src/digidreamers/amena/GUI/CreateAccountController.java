@@ -51,7 +51,8 @@ public class CreateAccountController implements Initializable {
     private TextField fxmotpass;
     @FXML
     private Button fxcreate;
-private DatePicker fxdateNaissance;
+    @FXML
+    private DatePicker fxdateNaissance;
 
     @FXML
 private CheckBox fxrole;
@@ -115,7 +116,7 @@ private CheckBox fxrole;
     }
          */
         // create a new User object
-        User p = new User(nom, prenom, adress, cin,Date.valueOf(dateNaissance), true, motpass, email, a);
+        User p = new User(nom, prenom, adress, cin,/*Date.valueOf(dateNaissance)*/date, true, motpass, email, a);
 
         // add the user to the database using a UserService object
         UserService pc = new UserService();

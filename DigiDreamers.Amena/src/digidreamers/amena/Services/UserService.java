@@ -175,7 +175,7 @@ public class UserService implements InterfaceCRUD <User> {
         ResultSet rs = stm.executeQuery(querry);
 
         while (rs.next()) {
-
+            user.setId(rs.getInt(1));
             user.setAdress(rs.getString("adress"));
             user.setNom(rs.getString("nom"));
             user.setPrenom(rs.getString("prenom"));
