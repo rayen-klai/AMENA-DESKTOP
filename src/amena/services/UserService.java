@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -269,9 +270,7 @@ public List<User> getUsersByEmail(String email) throws SQLException {
     }
 
     return false;
-}
-    
-    
+}  
     /*
   public void ajouter(User user) {
     try {
