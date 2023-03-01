@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.Services;
+package amena.services;
 
-import digidreamers.amena.Interfaces.InterfaceCRUD;
-import digidreamers.amena.Models.Role;
-import digidreamers.amena.Utils.MyConnection;
+import amena.interfaces.InterfaceCRUD;
+import amena.model.Role;
+import amena.utils.MyConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

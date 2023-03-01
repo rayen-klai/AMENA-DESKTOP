@@ -1,10 +1,10 @@
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import digidreamers.amena.Models.Role;
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.UserService;
+import amena.model.User;
+import amena.services.UserService;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -25,15 +25,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class UpdateProfilController implements Initializable {
 
-    Role b = new Role(51, "client");
     @FXML
     private ListView<User> selectedListView;
     @FXML
@@ -56,6 +55,12 @@ public class UpdateProfilController implements Initializable {
     private UserService userService;
     @FXML
     private Button btnback;
+    Date date = new java.sql.Date(new java.util.Date().getTime());
+ 
+    @FXML
+    private CheckBox fxclient;
+    @FXML
+    private CheckBox fxtransoorteur;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,12 +74,27 @@ public class UpdateProfilController implements Initializable {
                     // code qui s'exécute lorsque l'utilisateur sélectionne un élément dans la liste
                     User user = selectedListView.getSelectionModel().getSelectedItem();
                     // récupérer l'utilisateur sélectionné
-
+                    int a = user.getId();
                     emailTextField.setText(user.getEmail());
                     nomTextField.setText(user.getNom());
                     prenomTextField.setText(user.getPrenom());
                     adresseTextField.setText(user.getAdress());
                     cinTextField.setText(user.getCin());
+                    // convert java.sql.Date to LocalDate and set it in DatePicker
+                    java.sql.Date sqlDate = user.getDate_naissance();
+                    LocalDate localDate = sqlDate.toLocalDate();
+                    dateNaissanceTextField.setValue(localDate);
+                    String role = "";
+                    if (user.getRole().equals("transporteur")) {
+
+                        fxtransoorteur.isSelected();
+                        return;
+                    } else if (user.getRole().equals("client")) {
+
+                        fxclient.isSelected();
+                        return;
+                    }
+
                 }
             });
         } catch (SQLException ex) {
@@ -85,7 +105,7 @@ public class UpdateProfilController implements Initializable {
     @FXML
     private void modifierUtilisateur(ActionEvent event) throws SQLException {
         User user = selectedListView.getSelectionModel().getSelectedItem();
-      
+
         if (user != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -94,14 +114,15 @@ public class UpdateProfilController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                
+
                 String nom = nomTextField.getText().trim();
                 String prenom = prenomTextField.getText().trim();
                 String adresse = adresseTextField.getText().trim();
                 String cin = cinTextField.getText().trim();
                 String email = emailTextField.getText().trim();
                 String motDePasse = motDePasseTextField.getText().trim();
-                LocalDate dateNaissance = null;
+                LocalDate dateNaissance = dateNaissanceTextField.getValue();
+
                 if (!dateNaissanceTextField.getEditor().getText().trim().isEmpty()) {
                     try {
                         dateNaissance = dateNaissanceTextField.getValue();
@@ -138,28 +159,35 @@ public class UpdateProfilController implements Initializable {
                     cinAlert.setTitle("Erreur");
                     cinAlert.setHeaderText(null);
                     cinAlert.setContentText("Veuillez saisir un numéro de cin valide (8 chiffres) !");
-                   cinAlert.showAndWait();
+                    cinAlert.showAndWait();
                     return;
+                } 
+                String role = "";
+                if (user.getRole().equals("transporteur")) {
+                    fxtransoorteur.setSelected(true);
+                } else if (user.getRole().equals("client")) {
+                    fxclient.setSelected(true);
                 }
-                user.setId(selectedListView.getSelectionModel().getSelectedItem().getId());
+                
+                
+                User u1 = new User(user.getId(), cin, adresse, nom, prenom, date, true, motDePasse, email, role);
+                user.setId(user.getId());
                 user.setEmail(email);
                 user.setNom(nom);
                 user.setPrenom(prenom);
                 user.setAdress(adresse);
                 user.setCin(cin);
                 user.setMot_pass(motDePasse);
-                // user.setDate_naissance(dateNaissance);
-                user.setRole(b);
+            
+                user.setRole(role);
                 //user.setDate_creation_c(date_creation_c);
                 UserService userService = new UserService();
 
-                userService.modifier(user);
+                userService.modifier(u1);
 
                 ObservableList<User> users = FXCollections.observableArrayList(userService.afficher());
                 selectedListView.setItems(users);
-                
-                
-                
+
             }
         } else {
             Alert selectAlert = new Alert(Alert.AlertType.ERROR);
@@ -169,35 +197,33 @@ public class UpdateProfilController implements Initializable {
             selectAlert.showAndWait();
         }
     }
-private Button btnProfil;
+    private Button btnProfil;
 
-public void initialize() {
-    btnProfil.setOnAction(event -> {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) btnProfil.getScene().getWindow();
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    });
-    
-}
+    public void initialize() {
+        btnProfil.setOnAction(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("profil.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) btnProfil.getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
 
     @FXML
     private void back(ActionEvent event) throws IOException {
-        
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        
-         
+
     }
-    
-    
+
 }

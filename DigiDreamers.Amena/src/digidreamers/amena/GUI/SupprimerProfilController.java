@@ -1,7 +1,7 @@
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.UserService;
+import amena.model.User;
+import amena.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.Interfaces;
+package amena.interfaces;
 
 import java.util.List;
 

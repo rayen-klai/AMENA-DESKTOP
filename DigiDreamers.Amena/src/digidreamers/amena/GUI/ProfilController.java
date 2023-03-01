@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import digidreamers.amena.Models.User;
+import amena.model.User;
 
-import digidreamers.amena.Services.UserService;
+import amena.services.UserService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,7 +22,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -35,33 +38,37 @@ import javafx.stage.Stage;
  */
 public class ProfilController implements Initializable {
 
-    @FXML
     private ListView<User> userListView;
     @FXML
-    private Button afficherBtn;
-    @FXML
     private Button quitterBtn;
-    @FXML
     private TextField fxxemail;
     @FXML
-    private TextField fxnom;
+    private Label fxnom;
     @FXML
-    private TextField fxprenom;
+    private Label fxprenom;
     @FXML
-    private TextField fxxadress;
+    private Label fxxadress;
     @FXML
 
-    private TextField fxcin;
+    private Label fxcin;
     
     public static String semail;
     @FXML
     private Button chat;
     @FXML
-    private Button btnback;
+    private Button btnsup;
+    @FXML
+    private Label fxdate;
+    @FXML
+    private Label fxemail;
+    @FXML
+    private PasswordField fxpass;
+    @FXML
+    private Button btnmodifier;
 
     public void setUserInformation(String email) throws SQLException {
 
-        fxxemail.setText(email);
+        fxemail.setText(email);
         semail = email;
         UserService u = new UserService();
         User p = u.getUserByEmai(email);
@@ -78,7 +85,6 @@ public class ProfilController implements Initializable {
 
     }
 
-    @FXML
     public void handleAfficherBtn(ActionEvent event) throws SQLException {
 
         UserService u = new UserService();
@@ -122,6 +128,24 @@ public class ProfilController implements Initializable {
     }
 
     @FXML
-    private void back(ActionEvent event) {
+    private void supprimer(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("SupprimerProfil.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
+    @FXML
+    private void modifierUtilisateur(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("modifier.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+   
+}
 }

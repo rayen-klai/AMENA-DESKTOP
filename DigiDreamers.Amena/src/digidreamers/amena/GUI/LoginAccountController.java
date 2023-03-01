@@ -1,7 +1,7 @@
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.UserService;
+import amena.model.User;
+import amena.services.UserService;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginAccountController implements Initializable {
@@ -31,7 +35,10 @@ public class LoginAccountController implements Initializable {
 
     private User user;
     private UserService userService;
-    public static String semail;
+    @FXML
+    private Button fxCreate;
+    @FXML
+    private Text fxoubier;
 
     /**
      * Initializes the controller class.
@@ -51,7 +58,6 @@ public class LoginAccountController implements Initializable {
         password = hashPassword(password);
 
         UserService user = new UserService();
-         semail = fxemail.getText();
 
         // Validate email address
         if (!Pattern.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}", email)) {
@@ -86,8 +92,7 @@ public class LoginAccountController implements Initializable {
             Parent root = loader.load();
             ProfilController dc = loader.getController();
             String email = fxemail.getText();
-            
-
+          
             dc.setUserInformation(email);
 
             // Create a new scene with the loaded FXML file and show it
@@ -103,5 +108,27 @@ public class LoginAccountController implements Initializable {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(encodedhash);
+    }
+
+    @FXML
+    private void CretateAccount(ActionEvent event) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateAccount.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+
+    @FXML
+    private void ForgetPassword(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ForgetPasword.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

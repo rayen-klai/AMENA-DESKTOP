@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena;
+package amena;
 
-import digidreamers.amena.GUI.ProfilController;
-import digidreamers.amena.Models.Message;
-import digidreamers.amena.Models.Role;
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.ChatService;
-import digidreamers.amena.Services.RoleService;
-import digidreamers.amena.Services.UserService;
+import amena.gui.ProfilController;
+import amena.model.Message;
+import amena.model.Role;
+import amena.model.User;
+import amena.services.ChatService;
+import amena.services.RoleService;
+import amena.services.UserService;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -31,10 +31,10 @@ public class DigiDreamersAmena {
 
         //RoleService roleService = new RoleService();
         // création des 3 rôles
-        Role a = new Role(50, "admin");
-        Role b = new Role(51, "client");
-       // Role roleTransporteur = new Role(53, "transporteur");
-      /*  
+        //Role a = new Role(50, "admin");
+        //Role b = new Role(51, "client");
+        // Role roleTransporteur = new Role(53, "transporteur");
+        /*  
         
         roleService.ajouter(roleAdmin);
         roleService.ajouter(roleClient);
@@ -44,26 +44,30 @@ public class DigiDreamersAmena {
         
         roleService.supprimer(5);
         System.out.println(roleService.afficher());
-*/
+         */
         Date date = new java.sql.Date(new java.util.Date().getTime());
         // création des 3 utilisateurs
 
         UserService userService = new UserService();
 
-        User user1 = new User("12", "tn", "", "", date, true, "", "",b);
-       // userService.ajouter(user1);
-        System.out.println(userService.getByID(85));
-        User user3 = new User(85,"12", "t5555555555555555", "", "555555555", date, true, "", "",b);
-        userService.modifier(user3);
-         System.out.println(userService.getUserByEmai("aymen@esprit.tn"));
-                
-        //User user2 = new User("12", "fn", "lhedii", "pren", date, true, "mdp", "aaaaa@a", roleClient);
+        //User user1 = new User("nom", "prenom", date, "123123", "aymen.donga@gmail.com", "role");
+        //User mm = new User("nom", "prenom", date, "mot_pass", "emailjnhu", "role");
+        //  userService.ajouter(user1);
+        // User user3 = new User(105, "976749044", "adress", "nome", "prenom", date, true, "mot_pass", "email", "role", "token");
+        //User aa =new User(105, "tsssssss");
+        // userService.modifier(aa);
+        User aa = new User(1, "adress", "nom", date, "mot_pass", "email", "role");
+        aa.setNom("new_nom");
+        userService.modifier(aa);
+
+        System.out.println(userService.getByID(105));
+
+        //System.out.println(userService.getUserByEmai("aymen@esprit.tn"));
+        //userService.modifier(user3);
         //User user3 = new User("12", "dm", "zouaoui", "pren", date, true, "mdp", "a@gj@azadabb", roleTransporteur);
-       //userService.ajouter(user1);
-      //  System.out.println(userService.afficher2("aymenzouaoui@esprit.tn")); 
-       // System.out.println(userService.getUserByEmai("aymenzouaoui@esprit.tn"));
-       
-       
+        //userService.ajouter(user1);
+        //  System.out.println(userService.afficher2("aymenzouaoui@esprit.tn")); 
+        // System.out.println(userService.getUserByEmai("aymenzouaoui@esprit.tn"));
         //userService.ajouter(user2);
         //userService.ajouter(user3);
 /*
@@ -93,10 +97,7 @@ public class DigiDreamersAmena {
         System.out.println("5");
         System.out.println(userService.getUserByName("mohamed"));
         
-        */
-            
-        
-
+         */
     }
 
 }

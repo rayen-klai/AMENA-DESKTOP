@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.Services;
+package amena.services;
 
-import digidreamers.amena.Interfaces.InterfaceCRUD;
-import digidreamers.amena.Models.Role;
-
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Utils.MyConnection;
+import amena.interfaces.InterfaceCRUD;
+import amena.model.Role;
+import amena.model.User;
+import amena.utils.MyConnection;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,6 +21,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  *
  * @author aymen
  */
-public class UserService implements InterfaceCRUD <User> {
+public class UserService implements InterfaceCRUD<User> {
 
     Connection cnx = MyConnection.getInstance().getConnection();
     Statement stm;
@@ -40,10 +40,10 @@ public class UserService implements InterfaceCRUD <User> {
     }
 
     public UserService(String nom, String prenom) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
-/*
-    @Override
+
+      @Override
     public void ajouter(User u) {
         java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
         int stat = 0;
@@ -65,7 +65,7 @@ public class UserService implements InterfaceCRUD <User> {
                     + u.getDate_naissance() + "', '"
                     + date + "', '"
                     + stat + "','"
-                    + u.getRole().getId() + "', '"
+                    + u.getRole() + "', '"
                     + u.getMot_pass() + "', '"
                     + u.getEmail() + "')";
             stm.executeUpdate(querry);
@@ -78,28 +78,34 @@ public class UserService implements InterfaceCRUD <User> {
             e.printStackTrace();
         }
     }
-*/
+
     // update avec hashage
     @Override
-    public void modifier(User u) {
+    public void modifier(User user) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256");
-        
-        byte[] hashedPassword = md.digest(u.getMot_pass().getBytes(StandardCharsets.UTF_8));
 
-        PreparedStatement pla = cnx.prepareStatement("UPDATE user SET nom=?,prenom=?,adress=?,cin=?,dateNaissance=?,role=?,motPass=?,email=? where id="+ u.getId());
+            byte[] hashedPassword = md.digest(user.getMot_pass().getBytes(StandardCharsets.UTF_8));
 
-        pla.setString(1, u.getNom());
-        pla.setString(2, u.getPrenom());
-        pla.setString(3, u.getAdress());
-        pla.setString(4, u.getCin());
-        pla.setDate(5, u.getDate_naissance());
-        pla.setInt(6, u.getRole().getId());
-        pla.setString(7, new String(hashedPassword, StandardCharsets.UTF_8));
-        pla.setString(8, u.getEmail());
+            PreparedStatement pstmt = cnx.prepareStatement("UPDATE user SET nom=?,prenom=?,adress=?,cin=?,dateNaissance=?,role=?,motPass=?,email=?,token=? where id=" + user.getId());
+
+            // PreparedStatement pstmt = cnx.prepareStatement(query);
+    pstmt.setString(4, user.getCin());
+    pstmt.setString(3, user.getAdress());
+    pstmt.setString(1, user.getNom());
+    pstmt.setString(2, user.getPrenom());
+    pstmt.setDate(5, new java.sql.Date(user.getDate_naissance().getTime()));
+    //pstmt.setDate(6, new java.sql.Date(user.getDate_creation_c().getTime()));
+    //pstmt.setBoolean(7, user.isStatus());
+    pstmt.setString(6,  new String(hashedPassword, StandardCharsets.UTF_8));
+    pstmt.setString(8, user.getEmail());
+    pstmt.setString(7, user.getRole());
+    pstmt.setString(9, user.getToken());
+ 
+   
             System.out.println("user modifier");
-        pla.executeUpdate();
+            pstmt.executeUpdate();
         } catch (NoSuchAlgorithmException | SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -126,8 +132,9 @@ public class UserService implements InterfaceCRUD <User> {
             ResultSet RS = stm.executeQuery(req);
             while (RS.next()) {
                 User p = new User();
-                p.setNom(RS.getString("nom"));
                 p.setId(RS.getInt("id"));
+                p.setNom(RS.getString("nom"));
+
                 p.setPrenom(RS.getString(3));
                 p.setAdress(RS.getString(4));
                 p.setCin(RS.getString(5));
@@ -140,7 +147,7 @@ public class UserService implements InterfaceCRUD <User> {
 
         return list;
     }
-    
+
     public List<User> afficher2(String email) {
         List<User> list = new ArrayList<>();
         try {
@@ -165,7 +172,6 @@ public class UserService implements InterfaceCRUD <User> {
         return list;
     }
 
-
     public User getUserByEmai(String email) throws SQLException {
         String querry = "SELECT * FROM `user` WHERE `email`='" + email + "'";
         Statement stm = cnx.createStatement();
@@ -188,6 +194,26 @@ public class UserService implements InterfaceCRUD <User> {
 
     }
 
+    public List<User> getUsersByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM user WHERE email = ?";
+        PreparedStatement preparedStatement = cnx.prepareStatement(query);
+        preparedStatement.setString(1, email);
+        ResultSet rs = preparedStatement.executeQuery();
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setAdress(rs.getString("adress"));
+            user.setNom(rs.getString("nom"));
+            user.setPrenom(rs.getString("prenom"));
+            user.setMot_pass(rs.getString("motPass"));
+            user.setEmail(rs.getString("email"));
+            user.setCin(rs.getString("cin"));
+            users.add(user);
+        }
+        return users;
+    }
+
     public User getUserByCIN(String cin) throws SQLException {
         String querry = "SELECT *  FROM `user` WHERE `cin`=" + cin;
         Statement stm = cnx.createStatement();
@@ -208,23 +234,23 @@ public class UserService implements InterfaceCRUD <User> {
     }
 
     @Override
-    public User  getByID(int id) {
-         User user = new User();
-        try{
-        String querry = "SELECT *  FROM `user` WHERE `id`=" + id;
-        Statement stm = cnx.createStatement();
-        ResultSet rs = stm.executeQuery(querry);
+    public User getByID(int id) {
+        User user = new User();
+        try {
+            String querry = "SELECT *  FROM `user` WHERE `id`=" + id;
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(querry);
 
-       
-        while (rs.next()) {
-            user.setId(rs.getInt("id"));
-            user.setAdress(rs.getString("adress"));
-            user.setNom(rs.getString("nom"));
-            user.setPrenom(rs.getString("prenom"));
-            user.setMot_pass(rs.getString("motPass"));
-            user.setEmail(rs.getString("email"));
-            user.setCin(rs.getString("cin"));
-}} catch (SQLException ex) {
+            while (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setAdress(rs.getString("adress"));
+                user.setNom(rs.getString("nom"));
+                user.setPrenom(rs.getString("prenom"));
+                user.setMot_pass(rs.getString("motPass"));
+                user.setEmail(rs.getString("email"));
+                user.setCin(rs.getString("cin"));
+            }
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return user;
@@ -236,25 +262,23 @@ public class UserService implements InterfaceCRUD <User> {
         return Base64.getEncoder().encodeToString(encodedhash);
     }
     //verifier user
-    
+
     public boolean FoundUser(String email, String motpass) throws SQLException {
-    String query = "SELECT COUNT(*) FROM user WHERE email = ? AND motPass = ?";
-    PreparedStatement pstmt = cnx.prepareStatement(query);
+        String query = "SELECT COUNT(*) FROM user WHERE email = ? AND motPass = ?";
+        PreparedStatement pstmt = cnx.prepareStatement(query);
 
-    pstmt.setString(1, email);
-    pstmt.setString(2, motpass);
+        pstmt.setString(1, email);
+        pstmt.setString(2, motpass);
 
-    ResultSet rs = pstmt.executeQuery();
+        ResultSet rs = pstmt.executeQuery();
 
-    if (rs.next()) {
-        int count = rs.getInt(1);
-        return count > 0;
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            return count > 0;
+        }
+
+        return false;
     }
-
-    return false;
-}
-    
-    
     /*
   public void ajouter(User user) {
     try {
@@ -278,7 +302,8 @@ public class UserService implements InterfaceCRUD <User> {
     }
 }
 
-   */
+     */
+ /*
 
      @Override
     public void ajouter(User u) {
@@ -318,6 +343,6 @@ public class UserService implements InterfaceCRUD <User> {
         }
     }
 
+     */
 
-  
 }

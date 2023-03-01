@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import digidreamers.amena.GUI.ProfilController;
-import digidreamers.amena.Models.Role;
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.UserService;
+import amena.model.User;
+import amena.services.UserService;
 import java.io.IOException;
 
 import java.net.URL;
@@ -41,12 +39,10 @@ public class CreateAccountController implements Initializable {
     private TextField fxnom;
     @FXML
     private TextField fxprenom;
-    @FXML
-    private TextField fxcin;
+    // private TextField fxcin;
     @FXML
     private TextField fxemail;
-    @FXML
-    private TextField fxadress;
+
     @FXML
     private TextField fxmotpass;
     @FXML
@@ -55,7 +51,10 @@ public class CreateAccountController implements Initializable {
     private DatePicker fxdateNaissance;
 
     @FXML
-private CheckBox fxrole;
+    private CheckBox btnTransporteur;
+    @FXML
+    private CheckBox btnClient;
+
     /**
      * Initializes the controller class.
      */
@@ -66,26 +65,42 @@ private CheckBox fxrole;
 
     @FXML
     public void addperson(ActionEvent event) throws SQLException, IOException {
-         Role a;
-    if(fxrole.isSelected()){
-        a = new Role(50, "client");
-    } else {
-        a = new Role(51, "transporteur");
-    }
+
+        String role = "";
+        if (btnTransporteur.isSelected()) {
+            role = "transporteur";
+
+        } else if (btnClient.isSelected()) {
+            role = "Cleint";
+        }
+
+        if (btnTransporteur.isSelected() && btnClient.isSelected()) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("SVP selectionne seulment un role");
+            alert.showAndWait();
+            return;
+        }
         // get the current date and time
         Date date = new java.sql.Date(new java.util.Date().getTime());
 
         // get the user's input from the text fields
         String nom = fxnom.getText();
         String prenom = fxprenom.getText();
-        String cin = fxcin.getText();
+        //String cin = fxcin.getText();
         String email = fxemail.getText();
-        String adress = fxadress.getText();
+        //  String adress = fxadress.getText();
         String motpass = fxmotpass.getText();
-          LocalDate dateNaissance = fxdateNaissance.getValue();
-
+        LocalDate dateNaissance = fxdateNaissance.getValue();
+        
+        UserService pc =new UserService();
+ User existingUser =  pc.getUserByEmai(fxemail.getText());
+        System.out.println(existingUser);
+         User k = new User(nom, prenom, date, motpass, email, role);
         // validate the input
-        if (nom.isEmpty() || prenom.isEmpty() || adress.isEmpty() || cin.isEmpty() || email.isEmpty() || motpass.isEmpty()) {
+      
+        if (nom.isEmpty() || prenom.isEmpty() || /*adress.isEmpty() ||cin.isEmpty() || */ email.isEmpty() || motpass.isEmpty()) {
             // display an error message if any of the fields are empty
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
@@ -102,9 +117,29 @@ private CheckBox fxrole;
             alert.setHeaderText(null);
             alert.setContentText("Please enter a valid email address");
             alert.showAndWait();
+           return;
+        }        
+
+        // check if the email already exists in the database
+       /*
+        else if (existingUser != null) {
+            // display an error message if the email already exists
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("This email address already exists");
+            alert.showAndWait();
             return;
+        
         }
-        /*
+        
+         */
+       
+       
+        // create a new user object
+
+        // add the user to the database
+        /*   
     if (cin.length() != 8 && !cin.matches("[0-9]+")) {
         // display an error message if the CIN is not valid
         Alert alert = new Alert(AlertType.ERROR);
@@ -115,12 +150,10 @@ private CheckBox fxrole;
         return;
     }
          */
-        // create a new User object
-        User p = new User(nom, prenom, adress, cin,/*Date.valueOf(dateNaissance)*/date, true, motpass, email, a);
-
+       
         // add the user to the database using a UserService object
-        UserService pc = new UserService();
-        pc.ajouter(p);
+        
+        pc.ajouter(k);
 
         // Load profil.fxml file
         Parent profilParent = FXMLLoader.load(getClass().getResource("LoginAccount.fxml"));

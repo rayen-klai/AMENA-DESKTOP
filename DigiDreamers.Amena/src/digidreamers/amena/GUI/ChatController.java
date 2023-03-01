@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package digidreamers.amena.GUI;
+package amena.gui;
 
-import static digidreamers.amena.GUI.ProfilController.semail;
-import digidreamers.amena.Models.Message;
-import digidreamers.amena.Models.User;
-import digidreamers.amena.Services.ChatService;
-import digidreamers.amena.Services.UserService;
+import static amena.gui.ProfilController.semail;
+import amena.model.Message;
+import amena.model.User;
+import amena.services.ChatService;
+import amena.services.UserService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
