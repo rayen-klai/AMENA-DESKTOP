@@ -36,6 +36,7 @@ public class SupprimerDocumentController {
     private void initialize() {
         docDAO = new DocumentExpeditionCRUD();
         docListView.getItems().setAll(docDAO.afficher());
+        
     }
 
     @FXML
