@@ -57,6 +57,16 @@ public class Colis {
     this.statut = "en attente";
     this.dateExpedition = Date.valueOf(LocalDate.now());}
 
+public Colis(int id,String nomExpediteur, String adresseExpediteur, String nomDestinataire, String adresseDestinataire, float poids,String statut,LocalDate dateExpedition) {
+this.id = id;
+this.nomExpediteur = nomExpediteur;
+this.adresseExpediteur = adresseExpediteur;
+this.nomDestinataire = nomDestinataire;
+this.adresseDestinataire = adresseDestinataire;
+this.poids =poids;
+this.statut = "en attente";
+this.dateExpedition = Date.valueOf(dateExpedition);
+}
  /*        LES SETTERS ET LES GETTERS             */
     
   public int getId() {
@@ -124,7 +134,7 @@ public class Colis {
   
 @Override
 public String toString() {
-        return "Colis{" + "id=" + id + ", Nom Expediteur=" + nomExpediteur + ", Adresse Expediteur" + adresseExpediteur + "nomDestinataire"+nomDestinataire+"adresseDestinataire"+adresseDestinataire+"poids"+poids+"statut"+statut+"dateExpedition"+dateExpedition+"}/n";
+        return "Colis{" + "id=" + id + ", Nom Expediteur=" + nomExpediteur + ", Adresse Expediteur=" + adresseExpediteur + ", nomDestinataire="+nomDestinataire+", adresseDestinataire="+adresseDestinataire+", poids="+poids+", statut="+statut+", dateExpedition"+dateExpedition+"}/n";
     }
 
 /*             Trie Colis par critere souhaité                  */

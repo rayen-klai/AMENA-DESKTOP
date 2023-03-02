@@ -32,6 +32,20 @@ public class DocumentExpedition {
         this.id_colis = id_colis;
         this.statut = statut;
     }
+        public DocumentExpedition(int id, Date dateSignature,String statut) {
+        this.id = id;
+        this.dateSignature = Date.valueOf(LocalDate.now());
+        this.statut = statut;
+    }
+     public DocumentExpedition(int id,int id_colis, String statut) {
+        this.id = id;
+        this.id_colis = id_colis;
+        this.statut = statut;
+    }
+     public DocumentExpedition(int id,String statut) {
+        this.id = id;
+        this.statut = statut;
+    }
     
     // Getters and setters
     public int getId() {
@@ -76,18 +90,18 @@ public String toString() {
 /*                 Trie Document  par critere souhaité            */
 
 public List<DocumentExpedition> trier(String critere) {
-   Statement ste;
-Connection conn = MyConnection.getInstance().getConn();
+    Statement ste;
+    Connection conn = MyConnection.getInstance().getConn();
     List<DocumentExpedition> documentsTrie = new ArrayList<>();
     try {
-        String requeteSQL = "SELECT * FROM document_expedition ORDER BY " + critere;
+        String requeteSQL = "SELECT * FROM documentexpedition ORDER BY " + critere;
         PreparedStatement stmt = conn.prepareStatement(requeteSQL);
         ResultSet result = stmt.executeQuery();
         while (result.next()) {
             DocumentExpedition d = new DocumentExpedition();
             d.setId(result.getInt("id"));
             d.setDateSignature(result.getDate("dateSignature"));
-            d.setId_colis(result.getInt("id_colis"));
+            d.setId_colis(result.getInt("colis_id"));
             d.setStatut(result.getString("statut"));
             documentsTrie.add(d);
         }
