@@ -55,7 +55,7 @@ public class LoginAccountController implements Initializable {
         boolean isValid = true;
         String email = fxemail.getText();
         String password = fxmotpass.getText();
-        password = hashPassword(password);
+       password = hashPassword(password);
 
         UserService user = new UserService();
 

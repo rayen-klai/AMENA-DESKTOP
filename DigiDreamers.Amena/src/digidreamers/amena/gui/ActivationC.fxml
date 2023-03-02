@@ -14,7 +14,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="btnvoyer" layoutX="502.0" layoutY="306.0" mnemonicParsing="false"  text="envoyer" />
-      <Button fx:id="btnquit" layoutX="744.0" layoutY="510.0" mnemonicParsing="false" text="quitte" />
+      <Button fx:id="btnenvoi" layoutX="502.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleActivationButtonClick" text="envoyer" />
+      <Button fx:id="btnquit" layoutX="744.0" layoutY="510.0" mnemonicParsing="false" onAction="#handleQuitterBtn" text="quitte" />
    </children>
 </AnchorPane>

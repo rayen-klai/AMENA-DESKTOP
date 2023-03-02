@@ -12,19 +12,153 @@ import java.sql.Date;
  * @author aymen
  */
 public class User {
-    
-   private int id ;
-   private String cin;
-   private String adress;
-  private String nom ;
-  private String prenom ;
-  private Date date_naissance ;
-  private Date date_creation_c ;
-  private boolean status;
-  private String mot_pass ;
-  private String email ;
-  private String role ;
-  private String token;
+
+    private int id;
+    private String cin;
+    private String adress;
+    private String nom;
+    private String prenom;
+    private Date date_naissance;
+    private Date date_creation_c;
+    private boolean status;
+    private String mot_pass;
+    private String email;
+    private String role;
+    private String score;
+    private String image;
+
+    public User(String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String score, String token, String image, String num) {
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.score = score;
+        this.token = token;
+        this.image = image;
+        this.num = num;
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String score, String token, String image, String num) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.score = score;
+        this.token = token;
+        this.image = image;
+        this.num = num;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+    private String token;
+
+    public User(String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token, String image, String num) {
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.token = token;
+        this.image = image;
+        this.num = num;
+
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token, String image, String num) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.token = token;
+        this.image = image;
+        this.num = num;
+    }
+
+    private String num;
+
+    public User(String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token, String image) {
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.token = token;
+        this.image = image;
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token, String image) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.date_creation_c = date_creation_c;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.token = token;
+        this.image = image;
+    }
+
+    public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, boolean status, String mot_pass, String email, String role, String token) {
+        this.id = id;
+        this.cin = cin;
+        this.adress = adress;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.date_naissance = date_naissance;
+        this.status = status;
+        this.mot_pass = mot_pass;
+        this.email = email;
+        this.role = role;
+        this.token = token;
+    }
 
     public User() {
     }
@@ -47,8 +181,6 @@ public class User {
         this.email = email;
         this.role = role;
     }
-
-    
 
     public int getId() {
         return id;
@@ -148,7 +280,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + ", token=" + token + '}';
+        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + ", token=" + token + ", image=" + image + ", num=" + num + '}';
     }
 
     public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token) {
@@ -164,6 +296,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.token = token;
+
     }
 
     public User(String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token) {
@@ -227,7 +360,12 @@ public class User {
         this.role = role;
     }
 
-    
-   
-   
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

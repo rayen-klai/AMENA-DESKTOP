@@ -6,7 +6,6 @@
 package amena.services;
 
 import amena.interfaces.InterfaceCRUD;
-import amena.model.Role;
 import amena.model.User;
 import amena.utils.MyConnection;
 import java.nio.charset.StandardCharsets;
@@ -14,14 +13,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,10 +37,10 @@ public class UserService implements InterfaceCRUD<User> {
     }
 
     public UserService(String nom, String prenom) {
-       
+
     }
 
-      @Override
+    @Override
     public void ajouter(User u) {
         java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
         int stat = 0;
@@ -51,65 +48,84 @@ public class UserService implements InterfaceCRUD<User> {
             stat = 1;
         }
         try {
-            // hadhage mot ppass
+            // Hash the password
             String password = u.getMot_pass();
             String hashedPassword = hashPassword(password);
             u.setMot_pass(hashedPassword);
-            String querry = " INSERT INTO `user` "
-                    + "( `nom`, `prenom`, `adress`, `cin`, `dateNaissance`, `dateCreationC`, `status`, `role`, `motPass`, `email`) "
-                    + "VALUES ('"
-                    + u.getNom() + "', '"
-                    + u.getPrenom() + "', '"
-                    + u.getAdress() + "', '"
-                    + u.getCin() + "', '"
-                    + u.getDate_naissance() + "', '"
-                    + date + "', '"
-                    + stat + "','"
-                    + u.getRole() + "', '"
-                    + u.getMot_pass() + "', '"
-                    + u.getEmail() + "')";
-            stm.executeUpdate(querry);
-            
-            System.out.println("user ajoutee");
-            //sddq
-        } catch (SQLException ex) {
-            System.out.println("Personne non ajouté");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+
+            String query = "INSERT INTO `user` "
+                    + "( `nom`, `prenom`, `adress`, `cin`, `dateNaissance`, `dateCreationC`, `status`, `role`, `motPass`, `email`, `Token`, `score`, `numtel`,`image`) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setString(1, u.getNom());
+            statement.setString(2, u.getPrenom());
+            statement.setString(3, u.getAdress());
+            statement.setString(4, u.getCin());
+            statement.setDate(5, u.getDate_naissance());
+            statement.setDate(6, date);
+            statement.setInt(7, stat);
+            statement.setString(8, u.getRole());
+            statement.setString(9, u.getMot_pass());
+            statement.setString(10, u.getEmail());
+            statement.setString(11, u.getToken());
+            statement.setString(12, u.getScore());
+            statement.setString(13, u.getNum());
+            statement.setString(14, u.getImage());
+
+            statement.executeUpdate();
+
+            System.out.println("User added successfully");
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            System.out.println("Failed to add user: " + ex.getMessage());
+            // log or rethrow the exception
         }
     }
 
-    // update avec hashage
-    @Override
-    public void modifier(User user) {
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("SHA-256");
-
-            byte[] hashedPassword = md.digest(user.getMot_pass().getBytes(StandardCharsets.UTF_8));
-
-            PreparedStatement pstmt = cnx.prepareStatement("UPDATE user SET nom=?,prenom=?,adress=?,cin=?,dateNaissance=?,role=?,motPass=?,email=?,token=? where id=" + user.getId());
-
-            // PreparedStatement pstmt = cnx.prepareStatement(query);
-    pstmt.setString(4, user.getCin());
-    pstmt.setString(3, user.getAdress());
-    pstmt.setString(1, user.getNom());
-    pstmt.setString(2, user.getPrenom());
-    pstmt.setDate(5, new java.sql.Date(user.getDate_naissance().getTime()));
-    //pstmt.setDate(6, new java.sql.Date(user.getDate_creation_c().getTime()));
-    //pstmt.setBoolean(7, user.isStatus());
-    pstmt.setString(6,  new String(hashedPassword, StandardCharsets.UTF_8));
-    pstmt.setString(8, user.getEmail());
-    pstmt.setString(7, user.getRole());
-    pstmt.setString(9, user.getToken());
- 
-   
-            System.out.println("user modifier");
-            pstmt.executeUpdate();
-        } catch (NoSuchAlgorithmException | SQLException ex) {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+ @Override
+public void modifier(User u) {
+    try {
+        // Hash the new password (if provided)
+        String password = u.getMot_pass();
+        if (password != null && !password.isEmpty()) {
+            String hashedPassword = hashPassword(password);
+            u.setMot_pass(hashedPassword);
         }
+
+        String query = "UPDATE `user` SET "
+                + "`nom`='" + u.getNom() + "', "
+                + "`prenom`='" + u.getPrenom() + "', "
+                + "`adress`='" + u.getAdress() + "', "
+                + "`cin`='" + u.getCin() + "', "
+                //+ "`dateNaissance`='" + u.getDate_naissance() + "', "
+                + "`status`=" + (u.isStatus() ? 1 : 0) + ", "
+                + "`role`='" + u.getRole() + "', "
+                + "`motPass`='" + u.getMot_pass() + "', "
+                + "`email`='" + u.getEmail() + "', "
+                + "`Token`='" + u.getToken() + "', "
+                + "`score`='" + u.getScore() + "', "
+                + "`numtel`='" + u.getNum() + "', "
+                + "`image`='" + u.getImage() + "' "
+                + "WHERE `id`=" + u.getId();
+
+        Statement statement = cnx.createStatement();
+        int rowsUpdated = statement.executeUpdate(query);
+
+        if (rowsUpdated > 0) {
+            System.out.println("User updated successfully");
+        } else {
+            System.out.println("Failed to update user");
+        }
+    } catch (SQLException | NoSuchAlgorithmException ex) {
+        System.out.println("Failed to update user: " + ex.getMessage());
+        // log or rethrow the exception
     }
+
+}
+
+
+
+
 
     @Override
     public void supprimer(int id) {
@@ -301,10 +317,8 @@ public class UserService implements InterfaceCRUD<User> {
     } catch (SQLException ex) {
     }
 }
-
      */
  /*
-
      @Override
     public void ajouter(User u) {
         java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
@@ -333,7 +347,6 @@ public class UserService implements InterfaceCRUD<User> {
             stmt.setString(10, u.getEmail());
             stmt.setBytes(11, u.getImage());
             stmt.executeUpdate();
-
             System.out.println("user ajoutee");
             //sddq
         } catch (SQLException ex) {
@@ -342,7 +355,6 @@ public class UserService implements InterfaceCRUD<User> {
             e.printStackTrace();
         }
     }
-
      */
 
 }

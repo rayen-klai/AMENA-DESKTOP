@@ -65,6 +65,8 @@ public class ProfilController implements Initializable {
     private PasswordField fxpass;
     @FXML
     private Button btnmodifier;
+    @FXML
+    private ImageView img;
 
     public void setUserInformation(String email) throws SQLException {
 

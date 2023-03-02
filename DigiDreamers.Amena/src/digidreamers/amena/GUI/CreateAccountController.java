@@ -54,6 +54,8 @@ public class CreateAccountController implements Initializable {
     private CheckBox btnTransporteur;
     @FXML
     private CheckBox btnClient;
+    @FXML
+    private TextField fxadress;
 
     /**
      * Initializes the controller class.
@@ -90,16 +92,20 @@ public class CreateAccountController implements Initializable {
         String prenom = fxprenom.getText();
         //String cin = fxcin.getText();
         String email = fxemail.getText();
-        //  String adress = fxadress.getText();
+       // String adress = fxadress.getText();
         String motpass = fxmotpass.getText();
         LocalDate dateNaissance = fxdateNaissance.getValue();
+
         
-        UserService pc =new UserService();
- User existingUser =  pc.getUserByEmai(fxemail.getText());
+        
+        
+        
+        UserService pc = new UserService();
+        User existingUser = pc.getUserByEmai(fxemail.getText());
         System.out.println(existingUser);
-         User k = new User(nom, prenom, date, motpass, email, role);
+        User k = new User(nom, motpass, nom, prenom, date, date, true, motpass, email, role, role, role, email, nom);
         // validate the input
-      
+
         if (nom.isEmpty() || prenom.isEmpty() || /*adress.isEmpty() ||cin.isEmpty() || */ email.isEmpty() || motpass.isEmpty()) {
             // display an error message if any of the fields are empty
             Alert alert = new Alert(AlertType.ERROR);
@@ -117,11 +123,11 @@ public class CreateAccountController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Please enter a valid email address");
             alert.showAndWait();
-           return;
-        }        
+            return;
+        }
 
         // check if the email already exists in the database
-       /*
+        /*
         else if (existingUser != null) {
             // display an error message if the email already exists
             Alert alert = new Alert(AlertType.ERROR);
@@ -134,10 +140,7 @@ public class CreateAccountController implements Initializable {
         }
         
          */
-       
-       
         // create a new user object
-
         // add the user to the database
         /*   
     if (cin.length() != 8 && !cin.matches("[0-9]+")) {
@@ -150,9 +153,7 @@ public class CreateAccountController implements Initializable {
         return;
     }
          */
-       
         // add the user to the database using a UserService object
-        
         pc.ajouter(k);
 
         // Load profil.fxml file

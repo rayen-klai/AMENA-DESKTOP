@@ -1,79 +1,71 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package amena.gui;
 
-import static amena.gui.Identifier_votre_compteController.emailS;
-import static amena.gui.ProfilController.semail;
 import amena.model.User;
 import amena.services.UserService;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author aymen
- */
-public class ResetPasswordController implements Initializable {
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class ResetPasswordController {
 
     @FXML
     private PasswordField fxmotpasse;
+
     @FXML
     private PasswordField fxCmotpasse;
-    @FXML
-    private Button BtnComfirmer;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+    private User currentUser;
 
-    public void setUserInformation(String email) throws SQLException {
-
-        semail = email;
-
-        //fxdate.setText(user.getDate_naissance().toString());
-        // fxemail.setText(p.getEmail());
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 
     @FXML
-    private void Comfirmer(ActionEvent event) throws SQLException {
-        String motpasse = fxmotpasse.getText();
-        String Cmotpasse = fxCmotpasse.getText();
+    void Comfirmer(ActionEvent event) throws SQLException, IOException {
+        String motdepasse = fxmotpasse.getText();
+        String confirmer = fxCmotpasse.getText();
 
-        if (motpasse.equals(Cmotpasse)) {
-            UserService userService = new UserService();
-            User user = new User();
-            user.setEmail(semail); // assuming semail is set correctly by the setUserInformation method
-            user.setMot_pass(motpasse);
-            userService.modifier(user);
-
-            // show a success message to the user
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Modification du mot de passe");
+        if (motdepasse.isEmpty() || confirmer.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
             alert.setHeaderText(null);
-            alert.setContentText("Votre mot de passe a été modifié avec succès!");
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+        } else if (!motdepasse.equals(confirmer)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Les deux mots de passe ne correspondent pas.");
             alert.showAndWait();
         } else {
-            // show an error message to the user indicating that the passwords don't match
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur de confirmation du mot de passe");
+            currentUser.setMot_pass(motdepasse);
+            UserService u = new UserService();
+            u.modifier(currentUser);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mot de passe réinitialisé");
             alert.setHeaderText(null);
-            alert.setContentText("Les mots de passe ne correspondent pas. Veuillez réessayer.");
+            alert.setContentText("Votre mot de passe a été réinitialisé avec succès.");
             alert.showAndWait();
+
+            Stage stage = (Stage) fxmotpasse.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            Parent root = loader.load();
+
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root));
+            loginStage.show();
         }
     }
+
 }

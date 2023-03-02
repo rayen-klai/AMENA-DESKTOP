@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,9 +6,10 @@
 package amena.gui;
 
 import static amena.gui.ProfilController.semail;
-import amena.model.Role;
+
 import amena.model.User;
 import amena.services.UserService;
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.DateTimeException;
@@ -25,6 +26,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -59,6 +63,8 @@ public class modifier implements Initializable {
     private Button btnsup;
     @FXML
     private Button btnmodifier;
+    @FXML
+    private ImageView img;
 
   
 
@@ -203,4 +209,15 @@ public class modifier implements Initializable {
     private void supprimer(ActionEvent event) {
     }
 
+    @FXML
+    private void Ajoutimage(ActionEvent event) {
+         FileChooser fileChooser = new FileChooser();
+        File selectedfile = fileChooser.showOpenDialog(null);
+        if (selectedfile != null) {
+             String urlImg = selectedfile.toURI().toString(); 
+            Image image = new Image(urlImg) ; 
+            img.setImage(image);
+    }
+
+}
 }

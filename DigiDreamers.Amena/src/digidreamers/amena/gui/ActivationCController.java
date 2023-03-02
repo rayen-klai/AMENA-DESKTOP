@@ -1,38 +1,57 @@
-package amena.gui ;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package amena.gui;
 
 import static amena.gui.Identifier_votre_compteController.emailS;
+import amena.model.User;
+import amena.services.UserService;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import amena.model.User;
-import amena.services.UserService;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-public class ActivationCController {
+/**
+ * FXML Controller class
+ *
+ * @author aymen
+ */
+public class ActivationCController implements Initializable {
 
     @FXML
     private TextField fxToken;
     @FXML
-    private Button btnvoyer;
-    @FXML
     private Button btnquit;
+    @FXML
+    private Button btnenvoi;
 
-    public ActivationCController() {
-        // The no-argument constructor is required by the FXMLLoader
+    /**
+     * Initializes the controller class.
+     *
+     * @param url
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }
 
+    @FXML
     private void handleActivationButtonClick(ActionEvent event) throws SQLException, IOException {
         String token = fxToken.getText();
-        UserService u = new UserService();
-        User p = u.getUserByEmai(emailS);
+        UserService userService = new UserService();
+        User user = userService.getUserByEmai(emailS);
 
         if (token.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -40,28 +59,38 @@ public class ActivationCController {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez remplir le champ.");
             alert.showAndWait();
+            return;
+        }
 
-        } else if (token.equals(p.getToken())) {
-            p.setStatus(true);
-            u.modifier(p);
+        if (token.equals(user.getToken())) {
+            user.setStatus(true);
+            userService.modifier(user);
 
-            Stage stage = (Stage) btnvoyer.getScene().getWindow();
+            Stage stage = (Stage) btnenvoi.getScene().getWindow();
             stage.close();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ResetPassword.fxml"));
             Parent root = loader.load();
 
+            ResetPasswordController resetPasswordController = loader.getController();
+            resetPasswordController.setCurrentUser(user);
+
             Stage resetPasswordStage = new Stage();
             resetPasswordStage.setScene(new Scene(root));
             resetPasswordStage.show();
-
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur d'activation");
+            alert.setTitle("Erreur de saisie");
             alert.setHeaderText(null);
-            alert.setContentText("Le code d'activation est invalide. Il vous reste un essai.");
+            alert.setContentText("La clé d'activation est incorrecte.");
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleQuitterBtn(ActionEvent event) {
+        Stage stage = (Stage) btnenvoi.getScene().getWindow();
+        stage.close();
     }
 
 }

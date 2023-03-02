@@ -20,14 +20,14 @@
     </VBox>
    <Button fx:id="chat" layoutX="36.0" layoutY="427.0" mnemonicParsing="false" onAction="#chat" prefHeight="25.0" prefWidth="120.0" text="chat" />
      <Button fx:id="quitterBtn" layoutX="642.0" layoutY="427.0" onAction="#handleQuitterBtn" prefHeight="17.0" prefWidth="61.0" text="Quitter" />
-   <Button fx:id="btnsup" layoutX="33.0" layoutY="186.0" mnemonicParsing="false" onAction="#supprimer" text="suprimer" />
-   <Button fx:id="btnmodifier" layoutX="34.0" layoutY="230.0" mnemonicParsing="false" onAction="#modifierUtilisateur" text="modifier" />
+   <Button fx:id="btnsup" layoutX="228.0" layoutY="427.0" mnemonicParsing="false" onAction="#supprimer" text="suprimer" />
+   <Button fx:id="btnmodifier" layoutX="377.0" layoutY="427.0" mnemonicParsing="false" onAction="#modifierUtilisateur" text="modifier" />
    <Label layoutX="228.0" layoutY="225.0" text="adress" />
    <Label layoutX="228.0" layoutY="253.0" text="date de naaissance" />
    <Label layoutX="237.0" layoutY="276.0" text="cin" />
    <Label layoutX="231.0" layoutY="306.0" text="email" />
    <Label layoutX="235.0" layoutY="337.0" text="password" />
-   <ImageView fitHeight="115.0" fitWidth="140.0" layoutX="143.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="604.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../../../../amena.png" />
       </image>
@@ -35,4 +35,5 @@
    <Label fx:id="fxnom" layoutX="256.0" layoutY="121.0" prefHeight="17.0" prefWidth="101.0" text="nom" textAlignment="CENTER" />
    <Label fx:id="fxprenom" layoutX="367.0" layoutY="121.0" prefHeight="17.0" prefWidth="80.0" text="prenom" />
    <Line endX="335.0" layoutX="293.0" layoutY="163.0" startX="-247.0" />
+   <ImageView fx:id="img" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
 </AnchorPane>
