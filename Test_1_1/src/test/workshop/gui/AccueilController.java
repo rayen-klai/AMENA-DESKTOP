@@ -19,6 +19,10 @@ public class AccueilController {
     private Button modifierColisBtn;
     @FXML
     private Button afficherColisBtn;
+    @FXML
+    private Button OnLiv;
+    @FXML
+    private Button OnPos;
 
 
     // Méthode appelée lorsque l'utilisateur clique sur le bouton "Ajouter un colis"
@@ -93,5 +97,33 @@ public class AccueilController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void onLiv(ActionEvent event) throws IOException {
+          Accueil accueil = new Accueil();
+           Parent AffParent = FXMLLoader.load(getClass().getResource("Confirmer.fxml"));
+            Scene profilScene = new Scene(AffParent);
+
+            // Get the stage information
+            Stage window = (Stage) OnLiv.getScene().getWindow();
+
+            // Set the new scene
+            window.setScene(profilScene);
+            window.show();
+    }
+
+    @FXML
+    private void onPos(ActionEvent event) throws IOException {
+                  Accueil accueil = new Accueil();
+           Parent AffParent = FXMLLoader.load(getClass().getResource("Map.fxml"));
+            Scene profilScene = new Scene(AffParent);
+
+            // Get the stage information
+            Stage window = (Stage) OnPos.getScene().getWindow();
+
+            // Set the new scene
+            window.setScene(profilScene);
+            window.show();
     }
 }
