@@ -30,7 +30,7 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
     @Override
     public void ajouter(DocumentExpedition d) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO documentexpedition (dateSignature, id_colis, statut) VALUES (?,?,?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO documentexpedition (dateSignature, colis_id, statut) VALUES (?,?,?)");
             stmt.setObject(1, d.getDateSignature());
             stmt.setInt(2, d.getId_colis());
             stmt.setString(3, d.getStatut());
@@ -57,9 +57,9 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
     @Override
     public void modifier(DocumentExpedition d) {
         try {
-            String sql = "UPDATE documentexpedition SET dateSignature = ?, id_colis = ?, statut = ? WHERE id = ?";
+            String sql = "UPDATE documentexpedition SET dateSignature = ?, colis_id = ?, statut = ? WHERE id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setObject(1, d.getDateSignature());
+            preparedStatement.setDate(1, d.getDateSignature());
             preparedStatement.setInt(2, d.getId_colis());
             preparedStatement.setString(3, d.getStatut());
             preparedStatement.setInt(4, d.getId());
@@ -80,7 +80,7 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
                 DocumentExpedition d = new DocumentExpedition();
                 d.setId(resultSet.getInt("id"));
                 d.setDateSignature(resultSet.getDate("dateSignature"));
-                d.setId_colis(resultSet.getInt("id_colis"));
+                d.setId_colis(resultSet.getInt("colis_id"));
                 d.setStatut(resultSet.getString("statut"));
                 list.add(d);
             }
@@ -101,7 +101,7 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
                 d = new DocumentExpedition();
                 d.setId(resultSet.getInt("id"));
                 d.setDateSignature(resultSet.getDate("dateSignature"));
-                d.setId_colis(resultSet.getInt("id_colis"));
+                d.setId_colis(resultSet.getInt("colis_id"));
                 d.setStatut(resultSet.getString("statut"));
             }
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
     public List<DocumentExpedition> trierParDateExpedition() {
     List<DocumentExpedition> documentsTries = new ArrayList<>();
     try {
-        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM document_expedition ORDER BY dateExpedition ASC");
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM documentexpedition ORDER BY dateExpedition ASC");
         ResultSet result = stmt.executeQuery();
         while (result.next()) {
             DocumentExpedition doc = new DocumentExpedition();
@@ -130,14 +130,14 @@ public class DocumentExpeditionCRUD implements InterfaceCRUD<DocumentExpedition>
 public List<DocumentExpedition> trier(String critere) {
     List<DocumentExpedition> documentsTrie = new ArrayList<>();
     try {
-        String requeteSQL = "SELECT * FROM document_expedition ORDER BY " + critere;
+        String requeteSQL = "SELECT * FROM documentexpedition ORDER BY " + critere;
         PreparedStatement stmt = conn.prepareStatement(requeteSQL);
         ResultSet result = stmt.executeQuery();
         while (result.next()) {
             DocumentExpedition d = new DocumentExpedition();
             d.setId(result.getInt("id"));
             d.setDateSignature(result.getDate("dateSignature"));
-            d.setId_colis(result.getInt("id_colis"));
+            d.setId_colis(result.getInt("colis_id"));
             d.setStatut(result.getString("statut"));
             documentsTrie.add(d);
         }
@@ -146,4 +146,21 @@ public List<DocumentExpedition> trier(String critere) {
     }
     return documentsTrie;
 }
+    public List<DocumentExpedition> afficher2() {
+        List<DocumentExpedition> list = new ArrayList<>();
+        try {
+            PreparedStatement statement = conn.prepareStatement("SELECT dateSignature,colis_id,statut FROM documentexpedition");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                DocumentExpedition d = new DocumentExpedition();
+                d.setDateSignature(resultSet.getDate("dateSignature"));
+                d.setId_colis(resultSet.getInt("colis_id"));
+                d.setStatut(resultSet.getString("statut"));
+                list.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

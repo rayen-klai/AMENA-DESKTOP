@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.LocalDate;
@@ -275,4 +276,162 @@ public List<Colis> filterByStatut(String statut) {
     }
     return list;
 }
+
+/*public List<Colis> rechercher(double poids, LocalDate dateExp, String statut) {
+List<Colis> result = new ArrayList<>();
+String req = "SELECT * FROM colis WHERE poids = ? AND dateexpedition = ? AND statut = ?";
+try {
+PreparedStatement ps = conn.prepareStatement(req);
+
+ps.setDouble(1, poids);
+ps.setDate(2, java.sql.Date.valueOf(dateExp));
+ps.setString(3, statut);
+try (ResultSet resultSet = ps.executeQuery()) {
+while (resultSet.next()) {
+Colis colis = new Colis(
+resultSet.getInt("id_Colis"),
+resultSet.getString("nomexpediteur"),
+resultSet.getString("adresseexpediteur"),
+resultSet.getString("nomdestinataire"),
+resultSet.getString("adressedestinataire"),
+resultSet.getDouble("poids"),
+resultSet.getString("statut"),
+resultSet.getDate("dateExpedition").toLocalDate()
+);
+result.add(colis);
+}
+}
+} catch (SQLException e) {
+}
+return result;
+}*/
+/*public List<Colis> rechercher(float poids, LocalDate dateExp, String statut) {
+List<Colis> result = new ArrayList<>();
+String query = "SELECT * FROM colis WHERE ";
+List<String> conditions = new ArrayList<>();
+List<Object> parameters = new ArrayList<>();
+
+if (poids != 0.0) {
+conditions.add("poids = ?");
+parameters.add(poids);
+}
+
+if (dateExp != null) {
+conditions.add("dateexpedition = ?");
+parameters.add(Date.valueOf(dateExp));
+}
+
+if (statut != null) {
+conditions.add("statut = ?");
+parameters.add(statut);
+}
+
+if (conditions.isEmpty()) {
+// aucun critère de recherche n'a été spécifié
+return result;
+}
+
+query += String.join(" AND ", conditions);
+
+String req = "SELECT * FROM colis WHERE poids = ? AND dateexpedition = ? AND statut = ?";
+try {
+PreparedStatement ps = conn.prepareStatement(req);
+int i = 1;
+for (Object parameter : parameters) {
+if (parameter instanceof Float) {
+ps.setDouble(i, (Float) parameter);
+} else if (parameter instanceof Date) {
+ps.setDate(i, (Date) parameter);
+} else if (parameter instanceof String) {
+ps.setString(i, (String) parameter);
+}
+i++;
+}
+try (ResultSet resultSet = ps.executeQuery()) {
+while (resultSet.next()) {
+Colis colis = new Colis(
+resultSet.getInt("id_Colis"),
+resultSet.getString("nomexpediteur"),
+resultSet.getString("adresseexpediteur"),
+resultSet.getString("nomdestinataire"),
+resultSet.getString("adressedestinataire"),
+resultSet.getDouble("poids"),
+resultSet.getString("statut"),
+resultSet.getDate("dateexpedition").toLocalDate()
+);
+result.add(colis);
+}
+}
+} catch (SQLException e) {
+// gérer l'erreur de connexion à la base de données ou d'exécution de la requête
+System.out.println(e.getMessage());
+}
+return result;
+}*/
+public List<Colis> rechercher(float poids, LocalDate dateExp, String statut) {
+        List<Colis> result = new ArrayList<>();
+        String query = "SELECT * FROM colis WHERE ";
+        List<String> conditions = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
+
+    if (poids != 0.0f) { // Utiliser 0.0f pour un float
+        conditions.add("poids = ?");
+        parameters.add(poids);
+    }
+
+    if (dateExp != null) {
+        conditions.add("dateexpedition = ?");
+        parameters.add(Date.valueOf(dateExp));
+    }
+
+if (statut != null) {
+    conditions.add("statut = ?");
+    parameters.add(statut);
+}
+
+if (conditions.isEmpty()) {
+    // aucun critère de recherche n'a été spécifié
+    return result;
+}
+
+query += String.join(" AND ", conditions);
+String req = "SELECT * FROM colis WHERE poids = ? AND dateexpedition = ? AND statut = ?";
+try {
+PreparedStatement ps = conn.prepareStatement(req);
+int i = 1;
+for (Object parameter : parameters) {
+if (parameter instanceof Float) {
+ps.setFloat(i, (Float) parameter); // Utiliser setFloat pour un float
+} else if (parameter instanceof Date) {
+ps.setDate(i, (Date) parameter);
+} else if (parameter instanceof String) {
+ps.setString(i, (String) parameter);
+}
+i++;
+}
+try (ResultSet resultSet = ps.executeQuery()) {
+while (resultSet.next()) {
+Colis colis = new Colis(
+resultSet.getInt("id_Colis"),
+resultSet.getString("nomexpediteur"),
+resultSet.getString("adresseexpediteur"),
+resultSet.getString("nomdestinataire"),
+resultSet.getString("adressedestinataire"),
+resultSet.getFloat("poids"), // Utiliser getFloat pour un float
+resultSet.getString("statut"),
+resultSet.getDate("dateexpedition").toLocalDate()
+);
+result.add(colis);
+}
+}
+} catch (SQLException e) {
+// gérer l'erreur de connexion à la base de données ou d'exécution de la requête
+System.out.println(e.getMessage());
+}
+return result;
+}
+
+   
+
+
 }
