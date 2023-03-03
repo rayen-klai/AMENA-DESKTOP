@@ -64,7 +64,7 @@ public class LocationClientController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
   VehiculeCRUD vc =new VehiculeCRUD() ; 
-       lv.getItems().addAll(vc.afficher());
+       lv.getItems().addAll(vc.afficher_nonReserve());
            
 //  lv.getItems().addAll(vc.afficher()); 
            lv.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Vehicule>()

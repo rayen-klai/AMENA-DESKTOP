@@ -28,7 +28,6 @@ public class MainClient extends Application {
     public void start(Stage primaryStage) throws IOException {
   
         Parent root = FXMLLoader.load(getClass().getResource("locationClient.fxml"));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
 
        
         root.setOnMousePressed(event -> {
@@ -41,7 +40,7 @@ public class MainClient extends Application {
             primaryStage.setY(event.getScreenY() - y);
         });
 
-        primaryStage.setScene(new Scene(root, 841, 631));
+        primaryStage.setScene(new Scene(root, 841, 540));
         primaryStage.show();
         
         

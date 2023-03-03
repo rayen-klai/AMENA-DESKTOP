@@ -19,21 +19,32 @@ public class Reservation {
     private Date date_deb ; 
     private Date date_fin ; 
     private float somme ;
-
-    public Reservation(int idVeh, int idTrans, Date date_deb, Date date_fin, float somme) {
+    private boolean etat ;  
+    public Reservation(int idVeh, int idTrans, Date date_deb, Date date_fin, float somme,boolean etat) {
         this.idVeh = idVeh;
         this.idTrans = idTrans;
         this.date_deb = date_deb;
         this.date_fin = date_fin;
         this.somme = somme;
+        this.etat  =etat ; 
     }
- public Reservation(int idRes,int idVeh, int idTrans, Date date_deb, Date date_fin, float somme) {
+ public Reservation(int idRes,int idVeh, int idTrans, Date date_deb, Date date_fin, float somme,boolean etat) {
         this.idRes = idRes ;    
         this.idVeh = idVeh;
         this.idTrans = idTrans;
         this.date_deb = date_deb;
         this.date_fin = date_fin;
         this.somme = somme;
+        this.etat  =etat ; 
+
+    }
+
+    public void setEtat(boolean etat) {
+        this.etat = etat;
+    }
+
+    public boolean isEtat() {
+        return etat;
     }
 
     public Reservation() {

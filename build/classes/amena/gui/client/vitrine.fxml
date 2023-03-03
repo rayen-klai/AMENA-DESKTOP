@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="843.0" style="-fx-background-color: #e6e6e6;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="amena.gui.client.VitrineController">
+   <children>
+      <AnchorPane fx:id="pane" layoutY="90.0" prefHeight="451.0" prefWidth="843.0" style="-fx-background-color: purple;" />
+   </children>
+</AnchorPane>

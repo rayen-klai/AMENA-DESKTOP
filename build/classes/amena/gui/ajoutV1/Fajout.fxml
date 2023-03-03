@@ -60,7 +60,6 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="ret" layoutX="652.0" layoutY="378.0" mnemonicParsing="false" onAction="#btback" prefHeight="26.0" prefWidth="146.0" text="Retourner" />
             <Label layoutX="26.0" layoutY="99.0" prefHeight="38.0" prefWidth="340.0" text="type de véhicule">
                <font>
                   <Font name="System Bold" size="21.0" />
@@ -68,5 +67,6 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button fx:id="ret" layoutX="668.0" layoutY="40.0" mnemonicParsing="false" onAction="#btback" prefHeight="26.0" prefWidth="146.0" text="Retourner" />
    </children>
 </AnchorPane>

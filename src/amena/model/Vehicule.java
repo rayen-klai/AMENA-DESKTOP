@@ -16,6 +16,15 @@ public class Vehicule {
     private boolean etat ;
     private int chevaux ; 
     private String marque ;
+    private String modele ;
+
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
+
+    public String getModele() {
+        return modele;
+    }
     private String kilometrage ;
     private String couleur ; 
     private float prix ; 
@@ -23,7 +32,8 @@ private String img ;
      public Vehicule()
      {}
     
-    public Vehicule(int id,String type,String immat, boolean etat,String kilometrage, int chevaux, String marque, String couleur, float prix,String img) {
+    public Vehicule(int id,String type,String immat, boolean etat,String kilometrage, int chevaux, String marque,String modele, String couleur, float prix,String img) {
+        this.modele = modele ; 
         this.id = id ; 
         this.type = type ; 
         this.immat = immat;
@@ -35,7 +45,7 @@ private String img ;
         this.prix = prix;
         this.img = img ;
     }
-    public Vehicule(String type,String immat, boolean etat,String kilometrage,int chevaux, String marque, String couleur, float prix,String img) {
+    public Vehicule(String type,String immat, boolean etat,String kilometrage,int chevaux, String marque,String modele, String couleur, float prix,String img) {
         this.img  = img  ; 
         this.type = type ; 
         this.immat = immat;
@@ -45,6 +55,32 @@ private String img ;
         this.marque = marque;
         this.couleur = couleur;
         this.prix = prix;
+                this.modele = modele ; 
+
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehicule other = (Vehicule) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
 
     public void setImg(String img) {

@@ -33,6 +33,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
@@ -42,8 +43,6 @@ import javafx.stage.FileChooser;
  */
 public class CamInterfaceController implements Initializable {
 
-    @FXML
-    private AnchorPane paneA2,pane10;
     @FXML
     private Button buttonback;
     @FXML
@@ -57,11 +56,15 @@ public class CamInterfaceController implements Initializable {
     @FXML
     private ColorPicker tfclr;
     @FXML
-    private Button btnpic;
-    @FXML
     private ImageView imgv;
 
     private String urlImg; 
+    @FXML
+    private AnchorPane paneA5;
+    @FXML
+    private Button btnajcam;
+    @FXML
+    private TextField tfmod;
     /**
      * Initializes the controller class.
      */
@@ -162,10 +165,14 @@ public class CamInterfaceController implements Initializable {
     @FXML
     private void ajouterBC(ActionEvent event) {
 
+        
+             Color color = tfclr.getValue();
+            String colorCode = String.format("#%02X%02X%02X", (int) (color.getRed() * 255),
+                    (int) (color.getGreen() * 255), (int) (color.getBlue() * 255));
         if(test(tfmat.getText(),tfmar.getText(),tfchv.getText(),tfprx.getText()))
         {
             System.out.println("i m here");
-     Vehicule v = new Vehicule("Camion",tfmat.getText(),false,"0",Integer.parseInt(tfchv.getText()),tfmar.getText(),tfclr.getValue().toString(),Float.parseFloat(tfprx.getText()),urlImg) ;         
+     Vehicule v = new Vehicule("Camion",tfmat.getText(),false,"0",Integer.parseInt(tfchv.getText()),tfmar.getText(),tfmod.getText(),colorCode,Float.parseFloat(tfprx.getText()),urlImg) ;         
         VehiculeCRUD vc = new VehiculeCRUD() ;
         vc.ajouter(v);
          Alert alert = new Alert(Alert.AlertType.INFORMATION);

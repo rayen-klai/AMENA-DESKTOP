@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 /**
@@ -44,6 +45,8 @@ public class AjoutMBController implements Initializable {
 String urlImg ; 
     @FXML
     private ImageView imgv;
+    @FXML
+    private TextField tfmod;
     /**
      * Initializes the controller class.
      */
@@ -150,10 +153,13 @@ String urlImg ;
     }
     @FXML
     private void ajouterBc(ActionEvent event) {
-         if(test(tfmat.getText(),tfmar.getText(),tfprx.getText()))
+         Color color = tfclr.getValue();
+            String colorCode = String.format("#%02X%02X%02X", (int) (color.getRed() * 255),
+                    (int) (color.getGreen() * 255), (int) (color.getBlue() * 255));
+        if(test(tfmat.getText(),tfmar.getText(),tfprx.getText()))
         {
     
-     Vehicule v = new Vehicule("Moto",tfmat.getText(),false,"0",0,tfmar.getText(),tfclr.getValue().toString(),Float.parseFloat(tfprx.getText()),urlImg) ;         
+     Vehicule v = new Vehicule("Moto",tfmat.getText(),false,"0",0,tfmar.getText(),tfmod.getText(),colorCode,Float.parseFloat(tfprx.getText()),urlImg) ;         
         VehiculeCRUD vc = new VehiculeCRUD() ;
         vc.ajouter(v);
          Alert alert = new Alert(Alert.AlertType.INFORMATION);

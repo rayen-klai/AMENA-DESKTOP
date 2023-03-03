@@ -7,6 +7,7 @@ package amena.services;
 
 import amena.interfaces.InterfaceCRUD ;
 import amena.model.Reservation;
+import amena.model.Vehicule;
 import amena.utils.MyConnection;
 import java.sql.Connection;
 import java.sql.Date;
@@ -27,7 +28,12 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
     Connection conn = MyConnection.getInstance().getConn();
     public void ajouter(Reservation r) {
         try {
-            String req = "INSERT INTO `reservation` (`idVeh`, `idTrans`, `date_deb`, `date_fin`, `somme`) VALUES (?,?,?,?,?)";
+            String req = "INSERT INTO `reservation` (`idVeh`, `idTrans`, `date_deb`, `date_fin`, `somme` , `etat`) VALUES (?,?,?,?,?,?)";
+            String req2 = "UPDATE `vehicule` SET `etat` = '1'  WHERE idV = " + r.getIdVeh();
+            
+            PreparedStatement ps2=conn.prepareStatement(req2);
+             ps2.executeUpdate();
+
             PreparedStatement ps=conn.prepareStatement(req);
              
             ps.setInt(1, r.getIdVeh());
@@ -35,6 +41,8 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
             ps.setDate(3, r.getDate_deb());
             ps.setDate(4, r.getDate_fin());
             ps.setFloat(5, r.getSomme());
+            ps.setBoolean(6, r.isEtat());
+
              ps.executeUpdate();
             System.out.println("Reservation ajouté!!!");
         } catch (SQLException ex) {
@@ -47,7 +55,7 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
     
     public void modifier(Reservation r) {   
         try {
-            String req = "UPDATE `reservation` SET `idVeh` = '" + r.getIdVeh() + "', `Date_Deb` = '" + r.getDate_deb()+ "', `date_fin` = '" + r.getDate_fin() + "', `somme` = '" + r.getSomme()+ "' WHERE idRes = " + r.getIdRes();
+            String req = "UPDATE `reservation` SET `idVeh` = '" + r.getIdVeh() + "', `Date_Deb` = '" + r.getDate_deb()+ "', `date_fin` = '" + r.getDate_fin() + "', `somme` = '" + r.getSomme()+"', `etat` = '" + r.isEtat()+ "' WHERE idRes = " + r.getIdRes();
             Statement st = conn.createStatement();
             st.executeUpdate(req);
             System.out.println("Reservation updated !");
@@ -86,6 +94,8 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
              r.setDate_deb(RS.getDate(4));
              r.setDate_fin(RS.getDate(5));
              r.setSomme(RS.getFloat(6));
+              r.setEtat(RS.getBoolean(7));
+
              list.add(r);
             }
         } catch (SQLException ex) {
@@ -110,6 +120,8 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
              r.setDate_deb(RS.getDate(4));
              r.setDate_fin(RS.getDate(5));
              r.setSomme(RS.getFloat(6));
+              r.setEtat(RS.getBoolean(7));
+
         }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -134,13 +146,22 @@ public class ReservationCRUD implements InterfaceCRUD<Reservation> {
         r.setDate_deb(RS.getDate(4));
         r.setDate_fin(RS.getDate(5));
         r.setSomme(RS.getFloat(6));
+        r.setEtat(RS.getBoolean(7));
         list.add(r);
         }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return list ; 
-         
+        return list ;         
     }
-
+   public void modifier_etat(Reservation v) {
+  
+        try {
+            String req = "UPDATE `reservation` SET `etat` = '1' WHERE idRes = " + v.getIdRes();
+            Statement st = conn.createStatement();
+            st.executeUpdate(req);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
