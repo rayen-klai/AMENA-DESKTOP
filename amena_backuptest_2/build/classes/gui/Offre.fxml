@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="631.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OffreController">
+   <children>
+        <ScrollPane fx:id="scrollPane" layoutX="23.0" layoutY="93.0" prefHeight="525.0" prefWidth="793.0">
+         <content>
+            <VBox fx:id="vbox" prefHeight="395.0" prefWidth="342.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="btnAcc" layoutX="690.0" layoutY="542.0" mnemonicParsing="false" onAction="#btnNotificationOnAction" text="J'accepte" />
+   </children>
+</AnchorPane>
