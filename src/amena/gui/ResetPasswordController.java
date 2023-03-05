@@ -49,7 +49,7 @@ public class ResetPasswordController {
             UserService u = new UserService();
             currentUser.setMot_pass(motdepasse);
 
-            u.modifier(currentUser);
+            u.modifierPassword(currentUser);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mot de passe réinitialisé");
@@ -60,7 +60,7 @@ public class ResetPasswordController {
             Stage stage = (Stage) fxmotpasse.getScene().getWindow();
             stage.close();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginAccount.fxml"));
             Parent root = loader.load();
 
             Stage loginStage = new Stage();

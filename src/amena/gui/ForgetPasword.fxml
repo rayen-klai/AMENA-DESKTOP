@@ -7,22 +7,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="572.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amena.gui.ForgetPaswordController">
+<AnchorPane id="AnchorPane" prefHeight="572.0" prefWidth="840.0" style="-fx-background-color: #3ca3c6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amena.gui.ForgetPaswordController">
    <children>
-      <TextField fx:id="fxAddresseRec" layoutX="224.0" layoutY="319.0" prefHeight="25.0" prefWidth="332.0" text="Adresse e-mail ou numéro de mobile" />
-      <Text layoutX="229.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trouvez votre compte" wrappingWidth="192.13671875" />
-      <Text layoutX="229.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez entrer votre adresse e-mail ou votre numéro de mobile pour rechercher votre compte" wrappingWidth="321.13672310113907" />
+      <TextField fx:id="fxAddresseRec" layoutX="189.0" layoutY="372.0" prefHeight="25.0" prefWidth="332.0" text="Adresse e-mail ou numéro de mobile">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Text layoutX="198.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trouvez votre compte" wrappingWidth="308.13671875">
+         <font>
+            <Font size="30.0" />
+         </font></Text>
+      <Text layoutX="192.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez entrer votre adresse e-mail ou votre numéro de mobile pour rechercher votre compte" wrappingWidth="321.13672310113907">
+         <font>
+            <Font size="20.0" />
+         </font></Text>
       <Text layoutX="42.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amena" wrappingWidth="182.248046875">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Button fx:id="btnRechercher" layoutX="463.0" layoutY="389.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: #55d5e0;" text="Rechercher" />
-      <Button fx:id="btnAnnuler" layoutX="386.0" layoutY="389.0" mnemonicParsing="false" onAction="#Main" prefHeight="25.0" prefWidth="71.0" text="Annuler" />
-      <Line endX="227.0" layoutX="325.0" layoutY="247.0" startX="-100.0" />
-      <Line endX="168.0" layoutX="382.0" layoutY="361.0" startX="-156.0" />
-      <Button fx:id="btnconnecter" layoutX="708.0" layoutY="38.0" mnemonicParsing="false" onAction="#Connecte" prefHeight="25.0" prefWidth="93.0" text="se conncter" />
-      <TextField fx:id="fxmotpasse" layoutX="527.0" layoutY="38.0" text="Mot passe" />
-      <TextField fx:id="fxadresseC" layoutX="370.0" layoutY="37.0" text="Adress e-mail ou teléphone" />
+      <Button fx:id="btnRechercher" layoutX="429.0" layoutY="474.0" mnemonicParsing="false" onAction="#Rechercher" prefHeight="25.0" prefWidth="93.0" style="-fx-background-color: #55d5e0;" text="Rechercher" />
+      <Button fx:id="btnAnnuler" layoutX="352.0" layoutY="474.0" mnemonicParsing="false" onAction="#Main" prefHeight="25.0" prefWidth="71.0" text="Annuler" />
+      <Line endX="227.0" layoutX="291.0" layoutY="226.0" startX="-100.0" />
+      <Line endX="168.0" layoutX="358.0" layoutY="441.0" startX="-156.0" />
+      <Button fx:id="btnconnecter" layoutX="708.0" layoutY="38.0" mnemonicParsing="false" onAction="#Connecte" prefHeight="25.0" prefWidth="93.0" text="se conncter">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <TextField fx:id="fxmotpasse" layoutX="527.0" layoutY="38.0" text="Mot passe">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+      <TextField fx:id="fxadresseC" layoutX="342.0" layoutY="38.0" text="Adress e-mail ou teléphone">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
    </children>
 </AnchorPane>

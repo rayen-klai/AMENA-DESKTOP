@@ -102,7 +102,42 @@ public class LoginAccountController implements Initializable {
             stage.show();
 
         }
-    }
+    
+   /*
+    @FXML
+    private void handleConnectButtonAction() throws IOException, SQLException, NoSuchAlgorithmException {
+    if (validateInput()) {
+        String email = fxemail.getText();
+       
+        User user = userService.getUserByEmai(email);
+        if (user != null) {
+            FXMLLoader loader;
+            Parent root;
+            if (user.getRole().equals("Transporteur")) {
+                loader = new FXMLLoader(getClass().getResource("Transporteur.fxml"));
+                root = loader.load();
+                TransporteurController tc = loader.getController();
+                tc.setUserInformation(email);
+            } else if (user.getRole().equals("Client")) {
+                loader = new FXMLLoader(getClass().getResource("ClientProfil.fxml"));
+                root = loader.load();
+                ClientProfilController cc = loader.getController();
+                cc.setUserInformation(email);
+            } else {
+                loader = new FXMLLoader(getClass().getResource("AdminDashbord.fxml"));
+                root = loader.load();
+                AdminDashbordController ac = loader.getController();
+                ac.setUserInformation(email);
+            }
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) fxconnetc.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            // Handle invalid email
+        }
+    }*/
+}
 
     public static String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");

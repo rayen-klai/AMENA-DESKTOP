@@ -36,26 +36,28 @@ public class DigiDreamersAmena {
         Date date = new java.sql.Date(new java.util.Date().getTime());
 
         
-      User mm = new User("cin", "adress", "nom", "prenom", date, date, true, "mot_pass", "emasqqsdqil", "role", "token", "image", "num","sqdqsd");
+     // User mm = new User("cin", "adress", "nom", "bbbbbprenom", date, date, true, "mot_pass", "emasqqsdqil", "role", "token", "image", "num","sqdqsd");
 
-   //User mm = new User("nom", "prenom", date, "123123", "aymen.donga@gmail.com", "role");
+  // User mmb = new User("cin","nom", "prenom", date, date, true, "123123", "aymen.donga@gmail.com", "role","token", "image", "num","sqdqsd");
          UserService userService = new UserService();
-    //   userService.ajouter(mm);
+    //userService.ajouter(mm);
 //User aa = userService.getByID(100);
 //mm.setAdress("ghaziiii");*/
 
-User a=userService.getByID(146);
+User a=userService.getByID(159);
         System.out.println(a);
-a.setImage("aaaaaaaaaaaaaaaaaaa6");
-
+        
+        
+a.setAdress("arinaavvvvvvv");
+a.setEmail("aymen@gmail.com");
 
 
 System.out.println(a);
-        System.out.println("amenadddain(56454)é");
-userService.modifier(a);
+        System.out.println("amenadddain(56dddd454)é");
+userService.modifierPassword(a);
         System.out.println("dddd)");
 
-//userService.modifier(mm);
+//userService.modifier(a);
 
     }
 

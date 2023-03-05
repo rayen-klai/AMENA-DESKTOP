@@ -35,6 +35,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -71,6 +72,10 @@ public class ChatController implements Initializable {
     private Button bafficher;
     @FXML
     private Button btnback;
+    @FXML
+    private TextField fxrecherche;
+    @FXML
+    private Button btnrecherche;
 
     public ChatController() {
         try {
@@ -126,6 +131,9 @@ public class ChatController implements Initializable {
                 };
             }
         });
+        
+    // Effacer le champ de saisie de message
+    messageField.clear();
     }
 
     @Override
@@ -187,20 +195,44 @@ public class ChatController implements Initializable {
                 //chatTitle.setText("Chat avec " + user.getNom());
             }
         });
+        
+   
     }
 
     @FXML
     private void back(ActionEvent event) throws IOException {
-        
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        
-         
-    }
-    
 
+    }
+
+    @FXML
+private void userFind(ActionEvent event) throws SQLException {
+    String email = fxrecherche.getText(); // userEmail est l'objet TextField qui contient l'email entré par l'utilisateur
+    User user = userService.getUserByEmai(email);
+    if (user != null) {
+        ObservableList<User> userList = FXCollections.observableArrayList();
+        userList.add(user);
+        fxlisteusert.setItems(userList);
+        fxlisteusert.setCellFactory(param -> new ListCell<User>() {
+            @Override
+            protected void updateItem(User user, boolean empty) {
+                super.updateItem(user, empty);
+                if (empty || user == null) {
+                    setText(null);
+                } else {
+                    setText(user.getNom()); // Afficher seulement le nom de l'utilisateur dans la liste
+                }
+            }
+        });
+    } else {
+        // Si aucun utilisateur n'est trouvé, effacer la liste des utilisateurs
+        fxlisteusert.setItems(null);
+    }
+}
 }

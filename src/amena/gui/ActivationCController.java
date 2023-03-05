@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -36,6 +37,8 @@ public class ActivationCController implements Initializable {
     private Button btnquit;
     @FXML
     private Button btnenvoi;
+    @FXML
+    private Label fxtimer;
 
     /**
      * Initializes the controller class.
@@ -78,6 +81,7 @@ public class ActivationCController implements Initializable {
             Stage resetPasswordStage = new Stage();
             resetPasswordStage.setScene(new Scene(root));
             resetPasswordStage.show();
+            updateTimer(user);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de saisie");
@@ -91,6 +95,19 @@ public class ActivationCController implements Initializable {
     private void handleQuitterBtn(ActionEvent event) {
         Stage stage = (Stage) btnenvoi.getScene().getWindow();
         stage.close();
-    }
+    } @FXML
+private void updateTimer(User user) {
+    long remainingTime = user.getTokenExpirationDate().getTime() - System.currentTimeMillis();
+    if (remainingTime < 0) {
+        fxtimer.setText("Le token a expiré");
+    } else {
+        long seconds = remainingTime / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+        long days = hours / 24;
 
+        String remainingTimeString = String.format("%02d:%02d:%02d:%02d", days, hours % 24, minutes % 60, seconds % 60);
+        fxtimer.setText("Temps restant : " + remainingTimeString);
+    }
+}
 }

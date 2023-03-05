@@ -127,7 +127,7 @@ public class CreateAccountController implements Initializable {
         }
 
         // check if the email already exists in the database
-        /*
+        
         else if (existingUser != null) {
             // display an error message if the email already exists
             Alert alert = new Alert(AlertType.ERROR);
@@ -139,7 +139,7 @@ public class CreateAccountController implements Initializable {
         
         }
         
-         */
+         
         // create a new user object
         // add the user to the database
         /*   

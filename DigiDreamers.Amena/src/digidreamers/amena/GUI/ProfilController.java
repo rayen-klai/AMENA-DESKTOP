@@ -5,6 +5,7 @@
  */
 package amena.gui;
 
+import static amena.gui.Identifier_votre_compteController.emailS;
 import amena.model.User;
 
 import amena.services.UserService;
@@ -29,6 +30,7 @@ import javafx.scene.control.PasswordField;
 
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -61,8 +63,6 @@ public class ProfilController implements Initializable {
     private Label fxdate;
     @FXML
     private Label fxemail;
-    @FXML
-    private PasswordField fxpass;
     @FXML
     private Button btnmodifier;
     @FXML
@@ -104,7 +104,7 @@ public class ProfilController implements Initializable {
     }
 
     private void handleModifierBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UpdateProfil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("modifier.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -150,4 +150,19 @@ public class ProfilController implements Initializable {
 
    
 }
+
+
+    @FXML
+    private void renitialiser(ActionEvent event) throws SQLException, IOException {
+        emailS=semail;
+        UserService userService = new UserService();
+        User user = userService.getUserByEmai(emailS);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ResetPassword.fxml"));
+        Parent root = loader.load();
+        ResetPasswordController resetPasswordController = loader.getController();
+        resetPasswordController.setCurrentUser(user);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

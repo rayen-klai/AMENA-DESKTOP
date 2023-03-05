@@ -46,9 +46,10 @@ public class ResetPasswordController {
             alert.setContentText("Les deux mots de passe ne correspondent pas.");
             alert.showAndWait();
         } else {
-            currentUser.setMot_pass(motdepasse);
             UserService u = new UserService();
-            u.modifier(currentUser);
+            currentUser.setMot_pass(motdepasse);
+
+            u.modifierPassword(currentUser);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mot de passe réinitialisé");
@@ -59,7 +60,7 @@ public class ResetPasswordController {
             Stage stage = (Stage) fxmotpasse.getScene().getWindow();
             stage.close();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginAccount.fxml"));
             Parent root = loader.load();
 
             Stage loginStage = new Stage();

@@ -26,6 +26,15 @@ public class User {
     private String role;
     private String score;
     private String image;
+    private Date tokenExpirationDate;
+
+    public Date getTokenExpirationDate() {
+        return tokenExpirationDate;
+    }
+
+    public void setTokenExpirationDate(Date tokenExpirationDate) {
+        this.tokenExpirationDate = tokenExpirationDate;
+    }
 
     public User(String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String score, String token, String image, String num) {
         this.cin = cin;
@@ -280,9 +289,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + ", token=" + token + ", image=" + image + ", num=" + num + '}';
+        return "User{" + "id=" + id + ", cin=" + cin + ", adress=" + adress + ", nom=" + nom + ", prenom=" + prenom + ", date_naissance=" + date_naissance + ", date_creation_c=" + date_creation_c + ", status=" + status + ", mot_pass=" + mot_pass + ", email=" + email + ", role=" + role + ", score=" + score + ", image=" + image + ", tokenExpirationDate=" + tokenExpirationDate + ", token=" + token + ", num=" + num + '}';
     }
 
+    
     public User(int id, String cin, String adress, String nom, String prenom, Date date_naissance, Date date_creation_c, boolean status, String mot_pass, String email, String role, String token) {
         this.id = id;
         this.cin = cin;

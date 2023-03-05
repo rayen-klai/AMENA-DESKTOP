@@ -82,50 +82,88 @@ public class UserService implements InterfaceCRUD<User> {
         }
     }
 
- @Override
-public void modifier(User u) {
-    try {
-        // Hash the new password (if provided)
-        String password = u.getMot_pass();
-        if (password != null && !password.isEmpty()) {
-            String hashedPassword = hashPassword(password);
-            u.setMot_pass(hashedPassword);
+    @Override
+    public void modifier(User u) {
+        try {
+            // Hash the new password (if provided)
+            String password = u.getMot_pass();
+            if (password != null && !password.isEmpty()) {
+                String hashedPassword = hashPassword(password);
+                u.setMot_pass(hashedPassword);
+            }
+
+            String query = "UPDATE `user` SET "
+                    + "`nom`='" + u.getNom() + "', "
+                    + "`prenom`='" + u.getPrenom() + "', "
+                    + "`adress`='" + u.getAdress() + "', "
+                    + "`cin`='" + u.getCin() + "', "
+                    //+ "`dateNaissance`='" + u.getDate_naissance() + "', "
+                    + "`status`=" + (u.isStatus() ? 1 : 0) + ", "
+                    + "`role`='" + u.getRole() + "', "
+                    // + "`motPass`='" + u.getMot_pass() + "', "
+                    + "`email`='" + u.getEmail() + "', "
+                    + "`Token`='" + u.getToken() + "', "
+                    + "`score`='" + u.getScore() + "', "
+                    + "`numtel`='" + u.getNum() + "', "
+                    + "`token_timer`='" + u.getTokenExpirationDate() + "', "
+                    + "`image`='" + u.getImage() + "' "
+                    + "WHERE `id`=" + u.getId();
+
+            Statement statement = cnx.createStatement();
+            int rowsUpdated = statement.executeUpdate(query);
+
+            if (rowsUpdated > 0) {
+                System.out.println("User updated successfully");
+            } else {
+                System.out.println("Failed to update user");
+            }
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            System.out.println("Failed to update user: " + ex.getMessage());
+            // log or rethrow the exception
         }
 
-        String query = "UPDATE `user` SET "
-                + "`nom`='" + u.getNom() + "', "
-                + "`prenom`='" + u.getPrenom() + "', "
-                + "`adress`='" + u.getAdress() + "', "
-                + "`cin`='" + u.getCin() + "', "
-                //+ "`dateNaissance`='" + u.getDate_naissance() + "', "
-                + "`status`=" + (u.isStatus() ? 1 : 0) + ", "
-                + "`role`='" + u.getRole() + "', "
-                + "`motPass`='" + u.getMot_pass() + "', "
-                + "`email`='" + u.getEmail() + "', "
-                + "`Token`='" + u.getToken() + "', "
-                + "`score`='" + u.getScore() + "', "
-                + "`numtel`='" + u.getNum() + "', "
-                + "`image`='" + u.getImage() + "' "
-                + "WHERE `id`=" + u.getId();
-
-        Statement statement = cnx.createStatement();
-        int rowsUpdated = statement.executeUpdate(query);
-
-        if (rowsUpdated > 0) {
-            System.out.println("User updated successfully");
-        } else {
-            System.out.println("Failed to update user");
-        }
-    } catch (SQLException | NoSuchAlgorithmException ex) {
-        System.out.println("Failed to update user: " + ex.getMessage());
-        // log or rethrow the exception
     }
 
-}
+    public void modifierPassword(User u) {
+        try {
+            // Hash the new password (if provided)
+            String password = u.getMot_pass();
+            if (password != null && !password.isEmpty()) {
+                String hashedPassword = hashPassword(password);
+                u.setMot_pass(hashedPassword);
+            }
 
+            String query = "UPDATE `user` SET "
+                    + "`nom`='" + u.getNom() + "', "
+                    + "`prenom`='" + u.getPrenom() + "', "
+                    + "`adress`='" + u.getAdress() + "', "
+                    + "`cin`='" + u.getCin() + "', "
+                    //+ "`dateNaissance`='" + u.getDate_naissance() + "', "
+                    + "`status`=" + (u.isStatus() ? 1 : 0) + ", "
+                    + "`role`='" + u.getRole() + "', "
+                    + "`motPass`='" + u.getMot_pass() + "', "
+                    + "`email`='" + u.getEmail() + "', "
+                    + "`Token`='" + u.getToken() + "', "
+                    + "`score`='" + u.getScore() + "', "
+                    + "`numtel`='" + u.getNum() + "', "
+                    + "`token_timer`='" + u.getTokenExpirationDate() + "', "
+                    + "`image`='" + u.getImage() + "' "
+                    + "WHERE `id`=" + u.getId();
 
+            Statement statement = cnx.createStatement();
+            int rowsUpdated = statement.executeUpdate(query);
 
+            if (rowsUpdated > 0) {
+                System.out.println("User updated successfully");
+            } else {
+                System.out.println("Failed to update user");
+            }
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            System.out.println("Failed to update user: " + ex.getMessage());
+            // log or rethrow the exception
+        }
 
+    }
 
     @Override
     public void supprimer(int id) {
@@ -189,14 +227,45 @@ public void modifier(User u) {
     }
 
     public User getUserByEmai(String email) {
-    User user = null;
-    try {
-        String query = "SELECT * FROM `user` WHERE `email`=?";
-        PreparedStatement statement = cnx.prepareStatement(query);
-        statement.setString(1, email);
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            user = new User();
+        User user = null;
+        try {
+            String query = "SELECT * FROM `user` WHERE `email`=?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setNom(rs.getString("nom"));
+                user.setPrenom(rs.getString("prenom"));
+                user.setAdress(rs.getString("adress"));
+                user.setCin(rs.getString("cin"));
+                user.setDate_naissance(rs.getDate("dateNaissance"));
+                user.setDate_creation_c(rs.getDate("dateCreationC"));
+                user.setStatus(rs.getInt("status") == 1);
+                user.setRole(rs.getString("role"));
+                user.setMot_pass(rs.getString("motPass"));
+                user.setEmail(rs.getString("email"));
+                user.setToken(rs.getString("Token"));
+                user.setScore(rs.getString("score"));
+                user.setNum(rs.getString("numtel"));
+                user.setImage(rs.getString("image"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get user: " + ex.getMessage());
+            // log or rethrow the exception
+        }
+        return user;
+    }
+
+    public List<User> getUsersByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM user WHERE email = ?";
+        PreparedStatement preparedStatement = cnx.prepareStatement(query);
+        preparedStatement.setString(1, email);
+        ResultSet rs = preparedStatement.executeQuery();
+        List<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User user = new User();
             user.setId(rs.getInt("id"));
             user.setNom(rs.getString("nom"));
             user.setPrenom(rs.getString("prenom"));
@@ -212,31 +281,6 @@ public void modifier(User u) {
             user.setScore(rs.getString("score"));
             user.setNum(rs.getString("numtel"));
             user.setImage(rs.getString("image"));
-        }
-    } catch (SQLException ex) {
-        System.out.println("Failed to get user: " + ex.getMessage());
-        // log or rethrow the exception
-    }
-    return user;
-}
-    
-
-    public List<User> getUsersByEmail(String email) throws SQLException {
-        String query = "SELECT * FROM user WHERE email = ?";
-        PreparedStatement preparedStatement = cnx.prepareStatement(query);
-        preparedStatement.setString(1, email);
-        ResultSet rs = preparedStatement.executeQuery();
-        List<User> users = new ArrayList<>();
-        while (rs.next()) {
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setAdress(rs.getString("adress"));
-            user.setNom(rs.getString("nom"));
-            user.setPrenom(rs.getString("prenom"));
-            user.setMot_pass(rs.getString("motPass"));
-            user.setEmail(rs.getString("email"));
-            user.setCin(rs.getString("cin"));
-            user.setScore(rs.getString("score"));
             users.add(user);
         }
         return users;
@@ -250,26 +294,6 @@ public void modifier(User u) {
         User user = new User();
         while (rs.next()) {
 
-            user.setAdress(rs.getString("adress"));
-            user.setNom(rs.getString("nom"));
-            user.setPrenom(rs.getString("prenom"));
-            user.setMot_pass(rs.getString("motPass"));
-            user.setEmail(rs.getString("email"));
-            user.setCin(rs.getString("cin"));
-
-        }
-        return user;
-    }
-
-    public User getByID(int id) {
-    User user = null;
-    try {
-        String query = "SELECT * FROM `user` WHERE `id`=?";
-        PreparedStatement statement = cnx.prepareStatement(query);
-        statement.setInt(1, id);
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            user = new User();
             user.setId(rs.getInt("id"));
             user.setNom(rs.getString("nom"));
             user.setPrenom(rs.getString("prenom"));
@@ -285,13 +309,42 @@ public void modifier(User u) {
             user.setScore(rs.getString("score"));
             user.setNum(rs.getString("numtel"));
             user.setImage(rs.getString("image"));
+
         }
-    } catch (SQLException ex) {
-        System.out.println("Failed to get user: " + ex.getMessage());
-        // log or rethrow the exception
+        return user;
     }
-    return user;
-}
+
+    public User getByID(int id) {
+        User user = null;
+        try {
+            String query = "SELECT * FROM `user` WHERE `id`=?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setNom(rs.getString("nom"));
+                user.setPrenom(rs.getString("prenom"));
+                user.setAdress(rs.getString("adress"));
+                user.setCin(rs.getString("cin"));
+                user.setDate_naissance(rs.getDate("dateNaissance"));
+                user.setDate_creation_c(rs.getDate("dateCreationC"));
+                user.setStatus(rs.getInt("status") == 1);
+                user.setRole(rs.getString("role"));
+                user.setMot_pass(rs.getString("motPass"));
+                user.setEmail(rs.getString("email"));
+                user.setToken(rs.getString("Token"));
+                user.setScore(rs.getString("score"));
+                user.setNum(rs.getString("numtel"));
+                user.setImage(rs.getString("image"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("Failed to get user: " + ex.getMessage());
+            // log or rethrow the exception
+        }
+        return user;
+    }
 
     private static String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
