@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="124.0" prefWidth="186.0" style="-fx-background-color: #e6e3e3; -fx-border-radius: 30;" styleClass="pv" stylesheets="@amena/gui/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="126.0" layoutY="-1.0" stroke="BLACK" strokeMiterLimit="0.0" strokeType="INSIDE" strokeWidth="0.0" width="187.0" />
+      <Pane layoutY="96.0" prefHeight="29.0" prefWidth="187.0" style="-fx-background-color: #2f4558;" stylesheets="@amena/gui/style.css">
+         <children>
+            <Label layoutX="3.0" layoutY="7.0" prefHeight="17.0" prefWidth="110.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Pane layoutX="108.0" layoutY="3.0" prefHeight="23.0" prefWidth="77.0" style="-fx-background-color: #FFD700; -fx-border-radius: 20;" styleClass="prx" stylesheets="@amena/gui/style.css">
+               <children>
+                  <Label layoutX="20.0" layoutY="3.0" prefHeight="17.0" prefWidth="69.0" text="200DT">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</Pane>

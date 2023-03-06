@@ -50,7 +50,7 @@ import javafx.scene.control.Button;
  */
 public class DetResController implements Initializable {
     public static final String ACCOUNT_SID = "AC0643a8413f76b0e5bdd8ea93378281d0";
-    public static final String AUTH_TOKEN = "b7ac1675999e153eea5e5a5f9fb9979e";
+    public static final String AUTH_TOKEN = "827b6c00529c5da6b02c642fec32b1b6";
     @FXML
     private Label nom;
     @FXML

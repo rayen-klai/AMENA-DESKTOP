@@ -27,7 +27,8 @@ public class MainClient extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
   
-        Parent root = FXMLLoader.load(getClass().getResource("locationClient.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("vitrine.fxml"));
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
        
         root.setOnMousePressed(event -> {

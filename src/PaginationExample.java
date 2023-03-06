@@ -27,14 +27,7 @@ public class PaginationExample extends Application {
     }
 
     private Node createPage(int pageIndex) {
-        VBox page = new VBox(10);
-        int startIndex = pageIndex * PAGE_SIZE;
-        int endIndex = Math.min(startIndex + PAGE_SIZE, NUM_ITEMS);
-        for (int i = startIndex; i < endIndex; i++) {
-            Label label = new Label("Item " + (i + 1));
-            page.getChildren().add(label);
-        }
-        return page;
+        
     }
 
     public static void main(String[] args) {

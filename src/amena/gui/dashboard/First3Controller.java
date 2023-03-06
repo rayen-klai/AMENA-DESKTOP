@@ -51,8 +51,8 @@ public class First3Controller implements Initializable {
         
         
         
-      //  Image img = new Image("/amena/gui/FirstPage3/r.jpg",false) ; 
-  //      circle2.setFill(new ImagePattern(img));
+        Image img = new Image("file:/C:/Users/klair/OneDrive/Documents/NetBeansProjects/amena/src/amena/img/r.jpg",false) ; 
+        circle2.setFill(new ImagePattern(img));
  exit.setOnMouseClicked(event -> { System.exit(0);});
 
         pane1.setVisible(false);
@@ -65,7 +65,7 @@ public class First3Controller implements Initializable {
         fadeTransition.play();
 
         TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.5),pane2);
-        translateTransition.setByX(-600);
+        translateTransition.setByX(20);
         translateTransition.play();
 
         menu.setOnMouseClicked(event -> {
