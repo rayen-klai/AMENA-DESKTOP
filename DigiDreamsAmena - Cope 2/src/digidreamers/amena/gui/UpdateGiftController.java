@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -64,6 +65,43 @@ public class UpdateGiftController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    public boolean verif_Num(String num) {
+        int i = 0;
+        for (i = 0; i < num.length(); i++) {
+            if (Character.isDigit(num.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean verif_Num2(String num) {
+        int i = 0;
+        for (i = 0; i < num.length(); i++) {
+            if (!Character.isDigit(num.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean testTitle(String tit) {
+
+        if (tit.length() == 0) {
+            return false;
+        }
+        if (!verif_Num(tit)) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private boolean isImageSelected() {
+        return urlImg != null && !urlImg.isEmpty();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         tfName.setText(DetailsGiftsController.g.getName());
@@ -94,18 +132,42 @@ public class UpdateGiftController implements Initializable {
         CompetitionCRUD cr = new CompetitionCRUD();
         try {
             String name = tfName.getText();
-            String description = tdDesc.getText();
-            String value = tfValu.getText();
-            int idC = cr.convertTitleToId(listComps.getValue());
-            Gifts g = new Gifts(DetailsGiftsController.g.getId(), name, description, value, idC, urlImg);
-            GiftsCRUD gc = new GiftsCRUD();
+            if (!testTitle(name)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Le nom doit être une chaîne de caractères !");
+                alert.showAndWait();
+            } else {
+                String description = tdDesc.getText();
+                if (description.length() > 100) {
+                    description = description.substring(0, 100);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Attention");
+                    alert.setHeaderText(null);
+                    alert.setContentText("La description a été tronquée à 100 caractères.");
+                    alert.showAndWait();
+                } else {
+                    String value = tfValu.getText();
+                    int idC = cr.convertTitleToId(listComps.getValue());
+                    Gifts g = new Gifts(DetailsGiftsController.g.getId(), name, description, value, idC, urlImg);
+                    if (!isImageSelected()) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Ajoutez une photo !");
+                        alert.showAndWait();
+                    } else {
+                        GiftsCRUD gc = new GiftsCRUD();
 
-            gc.modifier(g);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsGifts.fxml"));
-            Parent root = loader.load();
-            DetailsGiftsController dgc = loader.getController();
-            tfName.getScene().setRoot(root);
-
+                        gc.modifier(g);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsGifts.fxml"));
+                        Parent root = loader.load();
+                        DetailsGiftsController dgc = loader.getController();
+                        tfName.getScene().setRoot(root);
+                    }
+                }
+            }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());;
         }

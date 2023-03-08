@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="pane23" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digidreamers.amena.gui.WheelController">
+    <Canvas fx:id="canvas" height="300" layoutX="142.0" layoutY="14.0" width="300" />
+    <Button fx:id="btnSpin" layoutX="247.0" layoutY="321.0" onAction="#spin" style="-fx-background-color: #81baff; -fx-background-radius: 30;" text="Spin!" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font></Button>
+   <Button fx:id="btnRet" layoutX="38.0" layoutY="21.0" mnemonicParsing="false" onAction="#retournerverT" prefHeight="31.0" prefWidth="86.0" style="-fx-background-radius: 30; -fx-background-color: #023c6b;" text="Retour" textFill="WHITE">
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+   </Button>
+</AnchorPane>

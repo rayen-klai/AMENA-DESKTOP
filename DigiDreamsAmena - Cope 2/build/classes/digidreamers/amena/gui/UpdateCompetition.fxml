@@ -52,14 +52,14 @@
             </VBox>
          </children>
       </Pane>
-      <Button fx:id="btnModifier" layoutX="627.0" layoutY="336.0" mnemonicParsing="false" onAction="#updateCompetition" prefHeight="31.0" prefWidth="113.0" style="-fx-background-radius: 30;" text="Modifier">
+      <Button fx:id="btnModifier" layoutX="627.0" layoutY="336.0" mnemonicParsing="false" onAction="#updateCompetition" prefHeight="31.0" prefWidth="113.0" style="-fx-background-radius: 30; -fx-background-color: #81baff;" text="Modifier" textFill="WHITE">
          <font>
-            <Font name="Segoe UI Symbol" size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnRe" layoutX="52.0" layoutY="20.0" mnemonicParsing="false" onAction="#retournerver" prefHeight="31.0" prefWidth="86.0" style="-fx-background-radius: 30;" text="Retour">
+      <Button fx:id="btnRe" layoutX="52.0" layoutY="20.0" mnemonicParsing="false" onAction="#retournerver" prefHeight="31.0" prefWidth="86.0" style="-fx-background-radius: 30; -fx-background-color: #023c6b;" text="Retour" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Button>
       <Pane layoutY="63.0" prefHeight="1.0" prefWidth="784.0" style="-fx-background-color: #2f4558;" />

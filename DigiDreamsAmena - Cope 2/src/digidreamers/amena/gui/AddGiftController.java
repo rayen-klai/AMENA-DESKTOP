@@ -5,7 +5,6 @@
  */
 package digidreamers.amena.gui;
 
-import digideramers.amena.models.Competition;
 import digideramers.amena.models.Gifts;
 import digidreamers.amena.services.CompetitionCRUD;
 import digidreamers.amena.services.GiftsCRUD;
@@ -98,18 +97,22 @@ public class AddGiftController implements Initializable {
 
     }
 
+    private boolean isImageSelected() {
+        return urlImg != null && !urlImg.isEmpty();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         List<String> listCompTitle = new ArrayList<>();
         CompetitionCRUD cr = new CompetitionCRUD();
         listCompTitle = cr.titreComp();
         ObservableList<String> observable2 = FXCollections.observableArrayList(listCompTitle);
-                listComp.setItems(observable2);
+        listComp.setItems(observable2);
     }
 
     @FXML
     private void saveGift(ActionEvent event) throws IOException {
-       CompetitionCRUD cr = new CompetitionCRUD();
+        CompetitionCRUD cr = new CompetitionCRUD();
         try {
             String name = tfName.getText();
             if (!testTitle(name) || !verif_Num2(tfValue.getText())) {
@@ -120,15 +123,32 @@ public class AddGiftController implements Initializable {
                 alert.showAndWait();
             } else {
                 String description = tfDescription.getText();
-                String value = tfValue.getText();
-                int idC = cr.convertTitleToId(listComp.getValue());
-                Gifts g = new Gifts(name, description, value, idC, urlImg);
-                GiftsCRUD gc = new GiftsCRUD();
-                gc.ajouter(g);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsGifts.fxml"));
-                Parent root = loader.load();
-                DetailsGiftsController dgc = loader.getController();
-                tfName.getScene().setRoot(root);
+                if (description.length() > 100) {
+                    description = description.substring(0, 100);
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Attention");
+                    alert.setHeaderText(null);
+                    alert.setContentText("La description a été tronquée à 100 caractères.");
+                    alert.showAndWait();
+                } else {
+                    String value = tfValue.getText();
+                    int idC = cr.convertTitleToId(listComp.getValue());
+                    Gifts g = new Gifts(name, description, value, idC, urlImg);
+                    if (!isImageSelected()) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Erreur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Ajoutez une photo !");
+                        alert.showAndWait();
+                    } else {
+                        GiftsCRUD gc = new GiftsCRUD();
+                        gc.ajouter(g);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsGifts.fxml"));
+                        Parent root = loader.load();
+                        DetailsGiftsController dgc = loader.getController();
+                        tfName.getScene().setRoot(root);
+                    }
+                }
             }
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

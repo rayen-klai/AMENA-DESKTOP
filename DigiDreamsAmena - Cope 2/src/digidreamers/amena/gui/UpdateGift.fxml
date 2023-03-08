@@ -54,9 +54,9 @@
             </VBox>
          </children>
       </Pane>
-      <Button fx:id="btnModify" layoutX="599.0" layoutY="337.0" mnemonicParsing="false" onAction="#updateGift" prefHeight="31.0" prefWidth="113.0" style="-fx-background-radius: 30;" text="Modifier">
+      <Button fx:id="btnModify" layoutX="599.0" layoutY="337.0" mnemonicParsing="false" onAction="#updateGift" prefHeight="31.0" prefWidth="113.0" style="-fx-background-radius: 30; -fx-background-color: #81baff;" text="Modifier" textFill="WHITE">
          <font>
-            <Font name="Segoe UI Symbol" size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Button>
       <Button fx:id="btnnPhoto" layoutX="583.0" layoutY="111.0" mnemonicParsing="false" onAction="#ajouterrPhoto" style="-fx-background-radius: 30; -fx-background-color: #81baff;" text="Ajouter photo" textFill="WHITE">

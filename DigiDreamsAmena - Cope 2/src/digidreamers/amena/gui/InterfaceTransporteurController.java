@@ -53,7 +53,7 @@ public class InterfaceTransporteurController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)  {
+    public void initialize(URL url, ResourceBundle rb) {
 
         btnParticiper.setDisable(true);
         CompetitionCRUD cc = new CompetitionCRUD();
@@ -66,7 +66,6 @@ public class InterfaceTransporteurController implements Initializable {
                 btnParticiper.setDisable(false);
 
             }
-
         });
     }
 
@@ -99,9 +98,12 @@ public class InterfaceTransporteurController implements Initializable {
 
     @FXML
     private void ConvertScore(ActionEvent event) {
-        /*
-        idScore = (idScore/4)+5 ; 
-        */
+        String scoreStr = idScore.getText();
+        if (!scoreStr.isEmpty()) {
+            int score = Integer.parseInt(scoreStr);
+            double diamonds = score / 15.0 * 3.5;
+            idDiam.setText(String.format("%.2f", diamonds));
+        }
     }
 
     @FXML

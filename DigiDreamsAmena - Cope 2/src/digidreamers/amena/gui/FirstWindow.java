@@ -21,7 +21,7 @@ public class FirstWindow extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("InterfaceTransporteur.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("InterfaceAccueil.fxml"));
             Scene scene = new Scene(root,780,537);
 
             primaryStage.setTitle("Gamification");

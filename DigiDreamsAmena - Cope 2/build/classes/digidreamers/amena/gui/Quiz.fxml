@@ -293,10 +293,13 @@
                         <Insets left="15.0" />
                      </VBox.margin>
                   </GridPane>
-                  <Button fx:id="btnSub" alignment="TOP_LEFT" onAction="#submitQu" prefHeight="37.0" prefWidth="74.0" style="-fx-background-color: Red;" text="   Submit" textAlignment="CENTER">
+                  <Button fx:id="btnSub" alignment="TOP_LEFT" onAction="#submitQu" prefHeight="37.0" prefWidth="117.0" style="-fx-background-color: #81baff;" text="   Submit" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets left="230.0" right="15.0" top="15.0" />
-                     </VBox.margin></Button>
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
                   <Label fx:id="resultLabel">
                      <font>
                         <Font name="Arial Narrow Bold" size="14.0" />

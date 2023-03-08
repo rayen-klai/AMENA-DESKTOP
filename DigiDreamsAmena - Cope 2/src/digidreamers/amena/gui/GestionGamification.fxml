@@ -24,7 +24,7 @@
       </Button>
       <ListView fx:id="listView" layoutX="32.0" layoutY="238.0" prefHeight="259.0" prefWidth="256.0" />
       <Pane layoutY="201.0" prefHeight="5.0" prefWidth="784.0" style="-fx-background-color: #2f4558;" />
-      <Button fx:id="button1" layoutX="363.0" layoutY="500.0" mnemonicParsing="false" onAction="#handlebc1" prefHeight="35.0" prefWidth="137.0" style="-fx-background-radius: 30; -fx-background-color: #81baff;" text="Modifier">
+      <Button fx:id="button1" layoutX="363.0" layoutY="500.0" mnemonicParsing="false" onAction="#handlebc1" prefHeight="35.0" prefWidth="137.0" style="-fx-background-radius: 30; -fx-background-color: #81baff;" text="Modifier" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>

@@ -22,7 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -40,6 +40,10 @@ public class InterfaceGiftsTransporteursController implements Initializable {
     private AnchorPane pane20;
     @FXML
     private Button btnRe;
+    @FXML
+    private TextField idScoreT;
+    @FXML
+    private TextField idDiamT;
 
     /**
      * Initializes the controller class.
@@ -62,14 +66,7 @@ public class InterfaceGiftsTransporteursController implements Initializable {
 
     @FXML
     private void convertDiam(ActionEvent event) {
-        try {
-            Parent sv;
-            sv = (AnchorPane) FXMLLoader.load(getClass().getResource(".fxml"));
-            pane20.getChildren().removeAll();
-            pane20.getChildren().setAll(sv);
-        } catch (IOException ex) {
-            Logger.getLogger(GestionGamificationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+     
     }
 
     @FXML
