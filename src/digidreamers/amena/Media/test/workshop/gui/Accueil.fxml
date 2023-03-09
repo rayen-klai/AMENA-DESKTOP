@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="test.workshop.gui.AccueilController">
+   <children>
+      <Button fx:id="ajoutColisBtn" layoutX="41.0" layoutY="129.0" onAction="#onAjoutColis" prefHeight="104.0" prefWidth="99.0" text="Ajouter un colis" textAlignment="CENTER" />
+      <Button fx:id="supprimerColisBtn" layoutX="176.0" layoutY="129.0" onAction="#onSupprimerColis" prefHeight="104.0" prefWidth="115.0" text="Supprimer un colis" />
+      <Button fx:id="modifierColisBtn" layoutX="325.0" layoutY="129.0" onAction="#onModifierColis" prefHeight="104.0" prefWidth="105.0" text="Modifier un colis" />
+      <Button fx:id="afficherColisBtn" layoutX="462.0" layoutY="129.0" onAction="#onAfficherColis" prefHeight="104.0" prefWidth="102.0" text="Afficher les colis" />
+      <Separator layoutX="151.0" layoutY="117.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="6.0" />
+      <Separator layoutX="306.0" layoutY="117.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="6.0" />
+      <Separator layoutX="446.0" layoutY="117.0" orientation="VERTICAL" prefHeight="119.0" prefWidth="6.0" />
+      <Label layoutX="198.0" layoutY="23.0" prefHeight="35.0" prefWidth="204.0" text="Gestion Des Colis" textFill="#1300a4">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="104.0" fitWidth="143.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/326412972_856681762111879_232346873904870547_n.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="36.0" layoutX="80.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/button-304224_960_720.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="29.0" layoutX="219.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/clear-1727486_1280.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="29.0" layoutX="363.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/téléchargement__5_-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="53.0" fitWidth="22.0" layoutX="502.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/72647.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="115.0" layoutX="467.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Media/COLIS.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="178.0" layoutY="64.0" prefHeight="5.0" prefWidth="223.0" />
+      <Button fx:id="OnLiv" layoutX="75.0" layoutY="282.0" mnemonicParsing="false" onAction="#onLiv" prefHeight="91.0" prefWidth="131.0" text="Confirmer La livraison" />
+      <Button fx:id="OnPos" layoutX="258.0" layoutY="282.0" mnemonicParsing="false" onAction="#onPos" prefHeight="91.0" prefWidth="211.0" text="Voir la dernierre position du colis" />
+      <Separator layoutX="40.0" layoutY="250.0" prefHeight="5.0" prefWidth="545.0" />
+      <Separator layoutX="231.0" layoutY="257.0" orientation="VERTICAL" prefHeight="142.0" prefWidth="6.0" />
+   </children>
+</AnchorPane>
